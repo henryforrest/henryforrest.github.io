@@ -1,103 +1,190 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta charset="UTF-8" /><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Henry Forrest</title>
-<style>
-  /* Global & reset */
-  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body { font-family: 'Segoe UI', sans-serif; color: #fff; background: #121212; }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Henry Forrest</title>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Segoe UI', sans-serif; color: #fff; background: #121212; }
 
-  /* Hero section with typing effect */
-  header {
-    position: relative;
-    height: 100vh; display: flex; flex-direction: column;
-    justify-content: center; align-items: center; overflow: hidden;
-    background: #1e1e1e;
-  }
-  header::after {
-    content: ""; position: absolute; width: 120%; height: 120%;
-    background: radial-gradient(circle, rgba(29,78,216,0.2), transparent);
-    animation: blob 15s infinite;
-  }
-  @keyframes blob {
-    0%,100% { transform: translate(0,0) scale(1);}
-    50% { transform: translate(20px, -30px) scale(1.1);}
-  }
-  h1 {
-    font-size: 3rem; white-space: nowrap;
-    border-right: 4px solid rgba(255,255,255,0.75);
-    overflow: hidden;
-    animation: typing 4s steps(30), blink .75s step-end infinite;
-  }
-  @keyframes typing {
-    from { width: 0; }
-    to { width: 24ch; }
-  }
-  @keyframes blink {
-    from, to { border-color: transparent; }
-    50% { border-color: rgba(255,255,255,0.75); }
-  }
+    nav {
+      position: fixed;
+      top: 0; left: 0; width: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 1rem;
+      display: flex;
+      justify-content: center;
+      z-index: 1000;
+    }
+    nav a {
+      color: #ccc;
+      margin: 0 1rem;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: #7cbfff;
+    }
 
-  /* Sections (fade/slide in) */
-  section { padding: 6rem 2rem; max-width:900px; margin:auto; opacity:0; transform:translateY(20px); transition: opacity .6s ease-out, transform .6s ease-out;}
-  section.visible { opacity:1; transform:translateY(0); }
+    header {
+      position: relative;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: #1e1e1e;
+      overflow: hidden;
+    }
+    header::after {
+      content: "";
+      position: absolute;
+      top: -20%; left: -20%;
+      width: 140%; height: 140%;
+      background: radial-gradient(circle, rgba(29,78,216,0.2), transparent);
+      animation: blob 15s infinite ease-in-out;
+      z-index: 0;
+    }
+    h1 {
+        font-size: 3rem; white-space: nowrap;
+        border-right: 4px solid rgba(255,255,255,0.75);
+        overflow: hidden;
+        animation: typing 4s steps(30), blink .75s step-end infinite;
+    }
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 18ch; }
+    }
+    @keyframes blink {
+      50% { border-color: transparent; }
+    }
+    @keyframes blob {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(20px, -30px) scale(1.1); }
+    }
 
-  /* Project cards with hover */
-  .projects { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:2rem; }
-  .card { background:#1f1f1f; padding:1.5rem; border-radius:12px; box-shadow:0 6px 20px rgba(0,0,0,0.4); transition:transform .3s ease, background .3s;}
-  .card:hover { transform:translateY(-8px); background:#2e2e2e;}
-  .tags { color:#7cbfff; font-size:.85rem; margin-top:.5rem; }
+    section {
+      min-height: 100vh;
+      padding: 6rem 2rem;
+      max-width: 1000px;
+      margin: auto;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
-  nav { position:fixed; top:0; width:100%; background:rgba(0,0,0,0.6); padding:1rem; display:flex; justify-content:center; z-index:100;}
-  nav a { color:#ccc; margin:0 1rem; text-decoration:none; font-weight:bold; transition:color .3s;}
-  nav a:hover { color:#7cbfff;}
-  footer { text-align:center; padding:2rem 0; font-size:.9rem; color:#777;}
-</style>
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      border-bottom: 2px solid #7cbfff;
+      display: inline-block;
+    }
+
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .card {
+      background: #1f1f1f;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+      transition: transform 0.3s ease, background 0.3s;
+    }
+    .card:hover {
+      transform: translateY(-8px);
+      background: #2e2e2e;
+    }
+    .tags {
+      color: #7cbfff;
+      font-size: 0.85rem;
+      margin-top: 0.5rem;
+    }
+
+    img.profile {
+      max-width: 200px;
+      border-radius: 50%;
+      margin-top: 2rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 0;
+      font-size: 0.9rem;
+      color: #777;
+    }
+  </style>
 </head>
 <body>
-<nav>
-  <a href="#about">About</a>
-  <a href="#projects">Projects</a>
-  <a href="#contact">Contact</a>
-</nav>
-<header>
-  <h1>Hi, I’m Henry Forrest&nbsp * Software Engineer</h1>
-</header>
-<section id="about"><h2>About Me</h2>
-  <p> 
-    Hi, I’m Henry Forrest — a Computer Science BSc (Hons) graduate from the University of Exeter, where I achieved a 2:1 (68%). I’m passionate about creating innovative software solutions, particularly in areas like AI, algorithmic trading, and interactive web design. 
-  <br><br>
-    I have worked on and developed a wide range of projects over my years studying computer science. These projects can be seen and played/experimented with here on this website. 
-  <br><br>
-    For any equiries please feel free to contact me. 
-  </p>
 
-  <p>
-    <img src="Portrait.JPG" style="max-width: 200px; border-radius: 50%;" >
-  </p>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </nav>
 
-</section>
-<section id="projects"><h2>Projects</h2>
-  <div class="projects">
-    <div class="card"><h3>The Banyan Fund</h3><p>Reinforcement‑learning trading platform using PPO & live stock data.</p><div class="tags">Python • RL • Web</div></div>
-    <div class="card"><h3>Pygame Racer</h3><p>Arcade‑style racer with sprite animations and multiple levels.</p><div class="tags">Python • Game Dev</div></div>
-    <!-- add more -->
-  </div>
-</section>
-<section id="contact"><h2>Contact</h2><p>Email me at <a href="mailto:henry@example.com">henry@example.com</a> or visit my <a href="https://github.com/henryforrest" target="_blank">GitHub</a>.</p></section>
-<footer>&copy; 2025 Henry Forrest</footer>
+  <header>
+    <h1>Hi, I’m Henry Forrest</h1>
+  </header>
 
-<script>
-  // Intersection Observer for scroll animations
-  const obs = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) e.target.classList.add('visible');
-    });
-  }, {threshold:0.2});
-  document.querySelectorAll('section').forEach(sec => obs.observe(sec));
+  <section id="about">
+    <h2>About Me</h2>
+    <p>
+      I’m Henry Forrest — a Computer Science BSc (Hons) graduate from the University of Exeter, where I achieved a 2:1 (68%). I’m passionate about creating innovative software solutions, particularly in areas like AI, algorithmic trading, and interactive web design.
+      <br><br>
+      I’ve developed a wide range of projects over my years studying computer science — including games, full-stack platforms, and deep learning applications — many of which you can explore below.
+      <br><br>
+      For any enquiries, please feel free to contact me directly.
+    </p>
+    <img class="profile" src="portrait.jpg" alt="Henry Forrest portrait" />
+  </section>
 
-  // Parallax blob
-  const blob = document.querySelector('header::after');
-</script>
-</body></html>
+  <section id="projects">
+    <h2>Projects</h2>
+    <div class="projects">
+      <div class="card">
+        <h3>The Banyan Fund</h3>
+        <p>Reinforcement‑learning trading platform using PPO & live stock data.</p>
+        <div class="tags">Python • RL • Web</div>
+      </div>
+      <div class="card">
+        <h3>Pygame Racer</h3>
+        <p>Arcade‑style racer with sprite animations and multiple levels.</p>
+        <div class="tags">Python • Game Dev</div>
+      </div>
+      <!-- Add more project cards here -->
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <p>
+      Email me at <a href="mailto:henry.forrest28@gmail.com">henry.forrest28@gmail.com</a><br>
+      or visit my <a href="https://github.com/henryforrest" target="_blank">GitHub</a>.
+    </p>
+  </section>
+
+  <footer>&copy; 2025 Henry Forrest</footer>
+
+  <script>
+    // Intersection Observer for fade-in
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) e.target.classList.add('visible');
+      });
+    }, { threshold: 0.2 });
+    document.querySelectorAll('section').forEach(sec => obs.observe(sec));
+  </script>
+</body>
+</html>
