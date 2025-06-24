@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+    body {
+        font-family: 'Roboto', sans-serif;
+        margin: 0;
+        padding: 0;
+        color: #333;
+        background-color: #f9f9f9;
+    }
+
+    .container {
+        width: 80%;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    /* Header Styles */
+    header {
+        background-color: #0f2c59;
+        color: white;
+        padding: 1em 0;
+        text-align: center;
+    }
+
+    header h1 {
+        margin: 0;
+    }
+
+    nav ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    nav ul li {
+        display: inline;
+        margin: 0 15px;
+    }
+
+    nav ul li a {
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    nav ul li a:hover {
+        text-decoration: underline;
+    }
+
+    /* Section Styles */
+    section {
+        padding: 2em 0;
+    }
+
+    section h2 {
+        color: #0f2c59;
+        text-decoration: underline;
+        margin-bottom: 1em;
+        text-align: center;
+    }
+
+    #about p {
+        text-align: center;
+        line-height: 1.6;
+    }
+
+    /* Portfolio Styles */
+    .portfolio-item {
+        background-color: white;
+        padding: 1em;
+        margin: 1em 0;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+    }
+
+    .portfolio-item h3 {
+        margin-top: 0;
+        color: #333;
+    }
+
+    .portfolio-item p {
+        color: #666;
+    }
+
+    .portfolio-item a {
+        color: #4CAF50;
+        text-decoration: none;
+    }
+
+    .portfolio-item a:hover {
+        text-decoration: underline;
+    }
+
+
+    /* Footer Styles */
+    footer {
+        position: fixed;
+        background-color: #333;
+        color: white;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+
+    }
+
+    /* hidden */
+    .hidden {
+        display: none;
+    } 
+
+</style>
+<script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function() {
+        const sections = document.querySelectorAll('section');
+
+        window.showSection = function(sectionId) {
+            sections.forEach(section => {
+                if (section.id === sectionId) {
+                    section.classList.remove('hidden');
+                } else {
+                    section.classList.add('hidden');
+                }
+            });
+        };
+
+        // Show the "about" section by default
+        showSection('about');
+    });
+
+</script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"> <!-- Link to Google Fonts -->
+    <script defer src="scripts.js"></script> <!-- Link to your JavaScript file -->
+
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <h1>My Portfolio</h1>
+            <nav>
+                <ul>
+                    <li><a href="#about" onclick="showSection('about')">About Me</a></li>
+                    <li><a href="#portfolio" onclick="showSection('portfolio')">Portfolio</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- About Me Section -->
+    <section id="about" class="hidden">
+        <div class="container">
+            <h2>About Me</h2>
+            <p>Hello my name is Henry Forrest, I am a passionate Computer Science student with a love for coding and problem-solving. I enjoy working on a variety of projects that challenge my skills and expand my knowledge. Through exploring this page you can take a look through my computer science journey, engaging in my various projects. </p>
+        </div>
+        <img src="Images/Portrait.JPG" style="max-width: 200px; border-radius: 50%;" >
+        
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="hidden">
+        <div class="container">
+            <h2>Portfolio</h2>
+            <div class="portfolio-item">
+                <h3>2D Platformer Game</h3>
+                <h4> 08/2021 </h4>
+                <p> I designed and programmed a two-dimensional platform game. This helped me to further develop my problem solving skills, as this was my largest project at the time. Furthermore, I greatly improved my research skills during this project as it was done independently. 
+                </p>
+                <a href="https://35f50e0b-7fac-46ab-aebf-aa53ca42c776-00-3tilkakufhfce.kirk.replit.dev/" target="_blank">Play Game</a>
+            </div>
+            <div class="portfolio-item">
+                <h3>Project Title 2</h3>
+                <p>Description </p>
+                <a href="https://github.com/yourusername/project2" target="_blank">View on GitHub</a>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Footer Section -->
+    <footer>
+        <div >
+            <p>&copy; 2024 Henry Thomas James Forrest. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+
+
+
+</html>
