@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('Background.jpg');   
+            background-size: cover;         
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .converter {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .converter h2 {
+            margin-top: 0;
+        }
+        .converter input, .converter select, .converter button {
+            margin-top: 10px;
+            padding: 10px;
+            font-size: 16px;
+            width: fit-content;
+        }
+        .converter button {
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+        }
+        .converter button:hover {
+            background-color: #0056b3;
+        }
+        result {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="converter">
+        <h2>Number Converter</h2>
+        <input type="text" id="numberInput" placeholder="Enter number">
+        <select id="inputUnit">
+            <option value="denary">Denary (Decimal)</option>
+            <option value="binary">Binary</option>
+            <option value="hexadecimal">Hexadecimal</option>
+        </select>
+        <select id="outputUnit">
+            <option value="denary">Denary (Decimal)</option>
+            <option value="binary">Binary</option>
+            <option value="hexadecimal">Hexadecimal</option>
+        </select>
+        <button onclick="convert()">Convert</button>
+        <br>
+        Result = 
+        <input type="text" id="result" placeholder="Result" readonly>
+    </div>
+
+    <script>
+        function convert() {
+            const numberInput = document.getElementById('numberInput').value.trim();
+            const inputUnit = document.getElementById('inputUnit').value;
+            const outputUnit = document.getElementById('outputUnit').value;
+            let result;
+
+            if (numberInput === "") {
+                alert("Please enter a number.");
+                return;
+            }
+
+            // Conversion based on input unit
+            let denary;
+            if (inputUnit === 'denary') {
+                if (isNaN(numberInput)) {
+                    alert("Please enter a valid denary (decimal) number.");
+                    return;
+                }
+                denary = parseInt(numberInput, 10);
+            } else if (inputUnit === 'binary') {
+                if (!/^[01]+$/.test(numberInput)) {
+                    alert("Please enter a valid binary number (only 0s and 1s).");
+                    return;
+                }
+                denary = parseInt(numberInput, 2);
+            } else if (inputUnit === 'hexadecimal') {
+                if (!/^[0-9a-fA-F]+$/.test(numberInput)) {
+                    alert("Please enter a valid hexadecimal number (0-9, A-F).");
+                    return;
+                }
+                denary = parseInt(numberInput, 16);
+            }
+
+            // Convert from denary to the desired output unit
+            if (outputUnit === 'denary') {
+                result = denary.toString(10);
+            } else if (outputUnit === 'binary') {
+                result = denary.toString(2);
+            } else if (outputUnit === 'hexadecimal') {
+                result = denary.toString(16).toUpperCase();
+            }
+
+            document.getElementById('result').value = result;
+        }
+    </script>
+</body>
+</html>
