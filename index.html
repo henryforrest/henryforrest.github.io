@@ -58,10 +58,10 @@
       z-index: 0;
     }
     h1 {
-        font-size: 3rem; white-space: nowrap;
-        border-right: 4px solid rgba(255,255,255,0.75);
-        overflow: hidden;
-        animation: typing 4s steps(30), blink .75s step-end infinite;
+      font-size: 3rem; white-space: nowrap;
+      border-right: 4px solid rgba(255,255,255,0.75);
+      overflow: hidden;
+      animation: typing 4s steps(30), blink .75s step-end infinite;
     }
     @keyframes typing {
       from { width: 0; }
@@ -96,6 +96,38 @@
       display: inline-block;
     }
 
+    .about-container {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .about-text {
+      flex: 1;
+    }
+
+    .about-image {
+      flex: 1;
+    }
+
+    .about-image img {
+      max-width: 200px;
+      border-radius: 50%;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    }
+
+    @media (min-width: 768px) {
+      .about-container {
+        flex-direction: row;
+        align-items: flex-start;
+      }
+      .about-image {
+        display: flex;
+        justify-content: flex-end;
+      }
+    }
+
     .projects {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -118,13 +150,6 @@
       color: #ff4d4d;
       font-size: 0.85rem;
       margin-top: 0.5rem;
-    }
-
-    img.profile {
-      max-width: 200px;
-      border-radius: 50%;
-      margin-top: 2rem;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
     }
 
     .contact-grid {
@@ -173,14 +198,20 @@
 
   <section id="about">
     <h2>About Me</h2>
-    <p>
-      I’m Henry Forrest — a Computer Science BSc (Hons) graduate from the University of Exeter, where I achieved a 2:1 (68%). I’m passionate about creating innovative software solutions, particularly in areas like AI, algorithmic trading, and interactive web design.
-      <br><br>
-      I’ve developed a wide range of projects over my years studying computer science — including games, full-stack platforms, and deep learning applications — many of which you can explore below.
-      <br><br>
-      For any enquiries, please feel free to contact me directly.
-    </p>
-    <img class="profile" src="pic.jpg" alt="Henry Forrest portrait" />
+    <div class="about-container">
+      <div class="about-text">
+        <p>
+          I’m Henry Forrest — a Computer Science BSc (Hons) graduate from the University of Exeter, where I achieved a 2:1 (68%). I’m passionate about creating innovative software solutions, particularly in areas like AI, algorithmic trading, and interactive web design.
+          <br><br>
+          I’ve developed a wide range of projects over my years studying computer science — including games, full-stack platforms, and deep learning applications — many of which you can explore below.
+          <br><br>
+          For any enquiries, please feel free to contact me directly.
+        </p>
+      </div>
+      <div class="about-image">
+        <img src="pic.jpg" alt="Henry Forrest portrait" />
+      </div>
+    </div>
   </section>
 
   <section id="projects">
@@ -188,13 +219,13 @@
     <div class="projects">
       <div class="card">
         <h3>Pygame Angry birds</h3>
-        <p>Further experimenting with pygame so made an angry birds inspired game to model projectile movements and collisions. </p>
+        <p>Further experimenting with pygame so made an angry birds inspired game to model projectile movements and collisions.</p>
         <div class="tags">Python • Game Dev</div>
         <a href="https://github.com/henryforrest/angry_birds_game">View on Github</a>
       </div>
       <div class="card">
         <h3>Alexa</h3>
-        <p>Experimenting with Flask I made a working Alexa model using APIs and microservices. Using various APIs it is able to convert speach to text and back to speech. </p>
+        <p>Experimenting with Flask I made a working Alexa model using APIs and microservices. Using various APIs it is able to convert speech to text and back to speech.</p>
         <div class="tags">Python • Flask</div>
         <a href="https://github.com/henryforrest/Alexa">View on Github</a>
       </div>
@@ -212,19 +243,19 @@
       </div>
       <div class="card">
         <h3>Ticket Marketplace</h3>
-        <p>Created a marketplace for club night tickets using the django framework. (not finished)</p>
+        <p>Created a marketplace for club night tickets using the Django framework. (not finished)</p>
         <div class="tags">Web • Python • SQL </div>
         <a href="https://github.com/henryforrest/ticket_marketplace">View on Github</a>
       </div>
       <div class="card">
         <h3>2D Platformer Game</h3>
-        <p>Desgined and created a two-dimentional platformer game for my EPQ using Javascript and the Kaboom library.</p>
-        <div class="tags">Web • Javascript </div>
+        <p>Designed and created a two-dimensional platformer game for my EPQ using JavaScript and the Kaboom library.</p>
+        <div class="tags">Web • JavaScript </div>
         <a href="https://github.com/henryforrest/">View on Github</a>
       </div>
       <div class="card">
         <h3>Binary and Hex Calculator</h3>
-        <p>Made a simple website to convert numbers between binary, hex and denary for GCSE and A-Level CS as I used them a lot and all the others had adverts.</p>
+        <p>Made a simple website to convert numbers between binary, hex and denary for GCSE and A-Level CS.</p>
         <div class="tags">Web • Maths </div>
         <a href="calculator.html">View</a>
       </div>
