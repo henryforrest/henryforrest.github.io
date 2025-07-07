@@ -244,23 +244,50 @@
         <p>Further experimenting with pygame so made an angry birds inspired game to model projectile movements and collisions.</p>
         <div class="tags">Python • Game Dev</div>
         <a href="https://github.com/henryforrest/angry_birds_game">View on Github</a>
+
         <div class="card-expanded">
           <p>This game models real-time projectile physics and integrates collision detection for structures. Built with multiple levels and powerups.</p>
           <img src="angrybirds.png" alt="Angry Birds Game Preview" />
+          <!-- or use a <video> if you have a demo: -->
+          <!-- <video src="angrybirds_demo.mp4" controls></video> -->
         </div>
       </div>
-      <!-- Add other cards the same way, make them clickable if they have expandable content -->
-      <!-- For example: -->
-      <div class="card" onclick="toggleCard(this)">
+      <div class="card">
         <h3>Alexa</h3>
-        <p>Experimenting with Flask I made a working Alexa model using APIs and microservices.</p>
+        <p>Experimenting with Flask I made a working Alexa model using APIs and microservices. Using various APIs it is able to convert speech to text and back to speech.</p>
         <div class="tags">Python • Flask</div>
         <a href="https://github.com/henryforrest/Alexa">View on Github</a>
-        <div class="card-expanded">
-          <p>This project integrates multiple APIs to perform voice recognition, data retrieval, and speech output.</p>
-        </div>
       </div>
-      <!-- Repeat for the rest -->
+      <div class="card">
+        <h3>Pygame Basketball</h3>
+        <p>Created a simple game where a user throws a basketball into a hoop in order to gain points.</p>
+        <div class="tags">Python • Game Dev</div>
+        <a href="https://github.com/henryforrest/basketball_game">View on Github</a>
+      </div>
+      <div class="card">
+        <h3>Dissertation</h3>
+        <p>Created a fully function website for beginner investors to learn more about investing and use ML agents to invest money. </p>
+        <div class="tags"> Flet • Python • ML  </div>
+        <a href="https://github.com/henryforrest/AI_Investing">View on Github</a>
+      </div>
+      <div class="card">
+        <h3>Ticket Marketplace</h3>
+        <p>Created a marketplace for club night tickets using the Django framework. (not finished)</p>
+        <div class="tags">Web • Python • SQL </div>
+        <a href="https://github.com/henryforrest/ticket_marketplace">View on Github</a>
+      </div>
+      <div class="card">
+        <h3>2D Platformer Game</h3>
+        <p>Designed and created a two-dimensional platformer game for my EPQ using JavaScript and the Kaboom library.</p>
+        <div class="tags">Web • JavaScript </div>
+        <a href="https://github.com/henryforrest/">View on Github</a>
+      </div>
+      <div class="card">
+        <h3>Binary and Hex Calculator</h3>
+        <p>Made a simple website to convert numbers between binary, hex and denary for GCSE and A-Level CS.</p>
+        <div class="tags">Web • Maths </div>
+        <a href="calculator.html">View</a>
+      </div>
     </div>
   </section>
 
@@ -268,40 +295,37 @@
     <h2>Contact</h2>
     <div class="contact-grid">
       <div class="contact-block">
-        <h3>Email</h3>
-        <p>henry@example.com</p>
+        <h3>Phone</h3>
+        <p>+44 75387 68192</p>
       </div>
       <div class="contact-block">
-        <h3>LinkedIn</h3>
-        <p><a href="https://linkedin.com/in/henryforrest" target="_blank">linkedin.com/in/henryforrest</a></p>
+        <h3>Email</h3>
+        <p><a href="mailto:henry.forrest28@gmail.com">henry.forrest28@gmail.com</a></p>
+      </div>
+      <div class="contact-block">
+        <h3>GitHub</h3>
+        <p><a href="https://github.com/henryforrest" target="_blank">github.com/henryforrest</a></p>
+      </div>
+      <div class="contact-block">
+        <h3>Location</h3>
+        <p>Surrey, UK</p>
       </div>
     </div>
   </section>
 
-  <footer>
-    &copy; 2025 Henry Forrest. All rights reserved.
-  </footer>
+  <footer>&copy; 2025 Henry Forrest</footer>
 
   <script>
-    // Scroll animation
-    const sections = document.querySelectorAll("section");
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-        }
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) e.target.classList.add('visible');
       });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.2 });
+    document.querySelectorAll('section').forEach(sec => obs.observe(sec));
 
-    sections.forEach(section => {
-      observer.observe(section);
-    });
-
-    // Expand/collapse card
     function toggleCard(card) {
-      card.classList.toggle('expanded');
+      card.classList.toggle("expanded");
     }
   </script>
-
 </body>
 </html>
