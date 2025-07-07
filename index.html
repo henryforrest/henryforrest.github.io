@@ -127,84 +127,46 @@
         justify-content: flex-end;
       }
     }
-    .projects-wrapper {
-      position: relative;
-      overflow: hidden;
-      width: 100%;
-      height: 100vh;
-    }
 
     .projects {
-      display: flex;
-      overflow-x: scroll;
-      scroll-snap-type: x mandatory;
-      height: 100%;
-      scroll-behavior: smooth;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
     }
 
     .card {
-      flex: 0 0 100%;
-      scroll-snap-align: start;
-      padding: 3rem;
-      box-sizing: border-box;
       background: #1f1f1f;
-      color: #fff;
-      height: 100%;
-      overflow-y: auto;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      transition: background 0.3s ease;
-    }
-
-    .card h3 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-    }
-
-    .card p {
-      font-size: 1.1rem;
-      margin-bottom: 1rem;
-    }
-
-    .card img, .card video {
-      max-width: 100%;
-      max-height: 300px;
+      padding: 1.5rem;
       border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+      transition: transform 0.3s ease, background 0.3s;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+    .card:hover {
+      transform: translateY(-8px);
+      background: #2e2e2e;
+    }
+    .card .card-expanded {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease, opacity 0.5s ease;
+      opacity: 0;
       margin-top: 1rem;
+    }
+    .card.expanded .card-expanded {
+      max-height: 1000px; 
+      opacity: 1;
+    }
+    .card-expanded img, .card-expanded video {
+      width: 100%;
+      border-radius: 8px;
+      margin-top: 1rem;
+      max-height: 300px;
       object-fit: cover;
     }
-
-    .card .tags {
-      margin-bottom: 1rem;
-      font-size: 0.9rem;
-      color: #ff4d4d;
-    }
-
-    .card a {
-      color: #ff4d4d;
-      margin-top: auto;
-    }
-
-    .project-nav {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 2rem;
-      background: rgba(0,0,0,0.5);
-      color: #fff;
-      border: none;
-      padding: 0.5rem 1rem;
-      cursor: pointer;
-      z-index: 10;
-    }
-    .project-nav.left {
-      left: 1rem;
-    }
-    .project-nav.right {
-      right: 1rem;
-    }
-
     .tags {
       color: #ff4d4d;
       font-size: 0.85rem;
@@ -276,47 +238,58 @@
 
   <section id="projects">
     <h2>Projects</h2>
-    <div class="projects-wrapper">
-      <button class="project-nav left" onclick="scrollProjects(-1)">&#10094;</button>
-      <div class="projects" id="projectCarousel">
-        <div class="card">
-          <h3>Pygame Angry Birds</h3>
-          <p>Further experimenting with pygame so made an angry birds inspired game to model projectile movements and collisions.</p>
-          <div class="tags">Python • Game Dev</div>
+    <div class="projects">
+      <div class="card" onclick="toggleCard(this)">
+        <h3>Pygame Angry birds</h3>
+        <p>Further experimenting with pygame so made an angry birds inspired game to model projectile movements and collisions.</p>
+        <div class="tags">Python • Game Dev</div>
+        <a href="https://github.com/henryforrest/angry_birds_game">View on Github</a>
+
+        <div class="card-expanded">
           <p>This game models real-time projectile physics and integrates collision detection for structures. Built with multiple levels and powerups.</p>
           <img src="angrybirds.png" alt="Angry Birds Game Preview" />
-          <a href="https://github.com/henryforrest/angry_birds_game">View on Github</a>
-        </div>
-        <div class="card">
-          <h3>Alexa</h3>
-          <p>Experimenting with Flask I made a working Alexa model using APIs and microservices.</p>
-          <div class="tags">Python • Flask</div>
-          <p>It converts speech to text and back, responding to voice commands.</p>
-          <a href="https://github.com/henryforrest/Alexa">View on Github</a>
-        </div>
-        <div class="card">
-          <h3>Pygame Basketball</h3>
-          <p>Simple game where a user throws a basketball into a hoop to gain points.</p>
-          <div class="tags">Python • Game Dev</div>
-          <a href="https://github.com/henryforrest/basketball_game">View on Github</a>
-        </div>
-        <div class="card">
-          <h3>Dissertation</h3>
-          <p>A fully functional website for beginner investors with ML-powered agents.</p>
-          <div class="tags">Flet • Python • ML</div>
-          <a href="https://github.com/henryforrest/AI_Investing">View on Github</a>
-        </div>
-        <div class="card">
-          <h3>Ticket Marketplace</h3>
-          <p>Marketplace for club night tickets using Django (in progress).</p>
-          <div class="tags">Web • Python • SQL</div>
-          <a href="https://github.com/henryforrest/ticket_marketplace">View on Github</a>
+          <!-- or use a <video> if you have a demo: -->
+          <!-- <video src="angrybirds_demo.mp4" controls></video> -->
         </div>
       </div>
-      <button class="project-nav right" onclick="scrollProjects(1)">&#10095;</button>
+      <div class="card">
+        <h3>Alexa</h3>
+        <p>Experimenting with Flask I made a working Alexa model using APIs and microservices. Using various APIs it is able to convert speech to text and back to speech.</p>
+        <div class="tags">Python • Flask</div>
+        <a href="https://github.com/henryforrest/Alexa">View on Github</a>
+      </div>
+      <div class="card">
+        <h3>Pygame Basketball</h3>
+        <p>Created a simple game where a user throws a basketball into a hoop in order to gain points.</p>
+        <div class="tags">Python • Game Dev</div>
+        <a href="https://github.com/henryforrest/basketball_game">View on Github</a>
+      </div>
+      <div class="card">
+        <h3>Dissertation</h3>
+        <p>Created a fully function website for beginner investors to learn more about investing and use ML agents to invest money. </p>
+        <div class="tags"> Flet • Python • ML  </div>
+        <a href="https://github.com/henryforrest/AI_Investing">View on Github</a>
+      </div>
+      <div class="card">
+        <h3>Ticket Marketplace</h3>
+        <p>Created a marketplace for club night tickets using the Django framework. (not finished)</p>
+        <div class="tags">Web • Python • SQL </div>
+        <a href="https://github.com/henryforrest/ticket_marketplace">View on Github</a>
+      </div>
+      <div class="card">
+        <h3>2D Platformer Game</h3>
+        <p>Designed and created a two-dimensional platformer game for my EPQ using JavaScript and the Kaboom library.</p>
+        <div class="tags">Web • JavaScript </div>
+        <a href="https://github.com/henryforrest/">View on Github</a>
+      </div>
+      <div class="card">
+        <h3>Binary and Hex Calculator</h3>
+        <p>Made a simple website to convert numbers between binary, hex and denary for GCSE and A-Level CS.</p>
+        <div class="tags">Web • Maths </div>
+        <a href="calculator.html">View</a>
+      </div>
     </div>
   </section>
-  
 
   <section id="contact">
     <h2>Contact</h2>
@@ -341,20 +314,18 @@
   </section>
 
   <footer>&copy; 2025 Henry Forrest</footer>
-  
+
   <script>
-    function scrollProjects(direction) {
-      const container = document.getElementById('projectCarousel');
-      const width = container.clientWidth;
-      container.scrollBy({ left: direction * width, behavior: 'smooth' });
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) e.target.classList.add('visible');
+      });
+    }, { threshold: 0.2 });
+    document.querySelectorAll('section').forEach(sec => obs.observe(sec));
+
+    function toggleCard(card) {
+      card.classList.toggle("expanded");
     }
-  
-    // Optional: add keyboard arrow support
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowLeft') scrollProjects(-1);
-      if (e.key === 'ArrowRight') scrollProjects(1);
-    });
   </script>
-  
 </body>
 </html>
