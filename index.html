@@ -141,17 +141,37 @@
       border-radius: 12px;
       box-shadow: 0 6px 20px rgba(0,0,0,0.4);
       transition: transform 0.3s ease, background 0.3s;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
     }
     .card:hover {
       transform: translateY(-8px);
       background: #2e2e2e;
+    }
+    .card .card-expanded {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease, opacity 0.5s ease;
+      opacity: 0;
+      margin-top: 1rem;
+    }
+    .card.expanded .card-expanded {
+      max-height: 1000px; 
+      opacity: 1;
+    }
+    .card-expanded img, .card-expanded video {
+      width: 100%;
+      border-radius: 8px;
+      margin-top: 1rem;
+      max-height: 300px;
+      object-fit: cover;
     }
     .tags {
       color: #ff4d4d;
       font-size: 0.85rem;
       margin-top: 0.5rem;
     }
-
     .contact-grid {
       display: grid;
       grid-template-columns: 1fr;
@@ -219,11 +239,18 @@
   <section id="projects">
     <h2>Projects</h2>
     <div class="projects">
-      <div class="card">
+      <div class="card" onclick="toggleCard(this)">
         <h3>Pygame Angry birds</h3>
         <p>Further experimenting with pygame so made an angry birds inspired game to model projectile movements and collisions.</p>
         <div class="tags">Python • Game Dev</div>
         <a href="https://github.com/henryforrest/angry_birds_game">View on Github</a>
+
+        <div class="card-expanded">
+          <p>This game models real-time projectile physics and integrates collision detection for structures. Built with multiple levels and powerups.</p>
+          <img src="angrybirds.png" alt="Angry Birds Game Preview" />
+          <!-- or use a <video> if you have a demo: -->
+          <!-- <video src="angrybirds_demo.mp4" controls></video> -->
+        </div>
       </div>
       <div class="card">
         <h3>Alexa</h3>
@@ -295,6 +322,10 @@
       });
     }, { threshold: 0.2 });
     document.querySelectorAll('section').forEach(sec => obs.observe(sec));
+
+    function toggleCard(card) {
+      card.classList.toggle("expanded");
+    }
   </script>
 </body>
 </html>
