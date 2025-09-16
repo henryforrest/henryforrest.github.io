@@ -226,6 +226,45 @@
       cursor: pointer;
       color: #ff4d4d;
     }
+
+    /* Tech Logo Slider */
+    #tech-stack {
+      text-align: center;
+      margin: 4rem 0;
+    }
+
+    .logo-slider {
+      overflow: hidden;
+      position: relative;
+      width: 100%;
+      display: flex;
+      align-items: center;
+    }
+
+    .logo-track {
+      display: flex;
+      width: calc(250px * 20); /* depends on number of logos */
+      animation: scroll 25s linear infinite;
+    }
+
+    .logo-track img {
+      width: 80px;
+      margin: 0 30px;
+      filter: brightness(0) invert(1);
+      opacity: 0.8;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .logo-track img:hover {
+      transform: scale(1.1);
+      opacity: 1;
+    }
+
+    @keyframes scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
   </style>
 </head>
 <body>
@@ -261,6 +300,41 @@
       </div>
     </div>
   </section>
+
+
+  <section id="tech-stack">
+    <h2>Technologies I Use</h2>
+    <div class="logo-slider">
+      <div class="logo-track">
+        <img src="logos/python.png" alt="Python">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript">
+        <img src="logos/react.png" alt="React">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg" alt="Django">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" alt="VSCode">
+        <!-- Duplicate logos for seamless looping -->
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg" alt="Django">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" alt="VSCode">
+      </div>
+    </div>
+  </section>
+  
+
+
+
+
 
   <section id="projects">
     <h2>Projects</h2>
