@@ -230,23 +230,23 @@
     /* Tech Logo Slider */
     #tech-stack {
       text-align: center;
-      margin: 4rem 0;
+      margin: 2rem auto; /* smaller vertical space */
+      padding: 0; /* no extra padding */
+      max-width: 100%; /* keep full width */
     }
 
     .logo-slider {
       overflow: hidden;
-      position: relative;
-      display: flex;
-      justify-content: center;
       width: 100%;
       max-width: 1000px;
-      margin: auto;
+      margin: 0 auto; /* ensures centering */
     }
 
     .logo-track {
       display: flex;
       gap: 2rem;
-      animation: scroll 30s linear infinite;
+      width: max-content; /* only as wide as logos */
+      animation: scroll 25s linear infinite;
     }
 
     .logo-track img {
@@ -266,12 +266,12 @@
       100% { transform: translateX(-50%); }
     }
 
-    /* Responsive adjustment */
     @media (max-width: 768px) {
       .logo-track img {
         height: 40px;
       }
     }
+
 
 
   </style>
@@ -314,6 +314,18 @@
   <section id="tech-stack">
     <div class="logo-slider">
       <div class="logo-track">
+        <img src="logos/python.png" alt="Python">
+        <img src="logos/js.png" alt="JavaScript">
+        <img src="logos/react.png" alt="React">
+        <img src="logos/django.png" alt="Django">
+        <img src="logos/html.png" alt="HTML5">
+        <img src="logos/css.png" alt="CSS3">
+        <img src="logos/git.png" alt="Git">
+        <img src="logos/github.png" alt="GitHub">
+        <img src="logos/mysql.png" alt="MySQL">
+        <img src="logos/vscode.png" alt="VSCode">
+        <img src="logos/flask.png" alt="Flask">
+        <!-- duplicate for infinate scroll -->
         <img src="logos/python.png" alt="Python">
         <img src="logos/js.png" alt="JavaScript">
         <img src="logos/react.png" alt="React">
