@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Market Brief — Case Study · Henry Forrest</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="case.css" />
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-name">Henry Forrest</a>
+      <a href="index.html#work" class="nav-back">← All Work</a>
+    </div>
+  </nav>
+
+  <article>
+    <div class="case-eyebrow">Case Study · 2026</div>
+    <h1>Market Brief — analyst-grade equity metrics, in your <em>pocket</em>.</h1>
+    <p class="case-lede">A native iOS app that surfaces the metrics serious investors actually care about — Sharpe ratio, max drawdown, P/E — backed by a Python service I built and deployed end-to-end.</p>
+
+    <div class="case-meta">
+      <div>
+        <div class="case-meta-label">Role</div>
+        <div class="case-meta-value">Solo developer</div>
+      </div>
+      <div>
+        <div class="case-meta-label">Stack</div>
+        <div class="case-meta-value">Swift, FastAPI, Fly.io</div>
+      </div>
+      <div>
+        <div class="case-meta-label">Status</div>
+        <div class="case-meta-value">Live on App Store</div>
+      </div>
+      <div>
+        <div class="case-meta-label">Link</div>
+        <div class="case-meta-value"><a href="https://apps.apple.com/us/app/market-brief-investing/id6758671631" target="_blank" rel="noopener">Download →</a></div>
+      </div>
+    </div>
+
+    <h2>The problem.</h2>
+    <p>Most retail investing apps show you a price chart and a market cap. That's fine for casual users, but it leaves out the metrics that actually inform investment decisions — risk-adjusted return, drawdown history, valuation multiples. To get those, retail investors either pay for Bloomberg-tier tooling or stitch together spreadsheets manually.</p>
+    <p>I wanted to build something that closed that gap: <strong>a clean, fast iOS app where you type a ticker and immediately see the metrics you'd care about if you actually understood markets</strong>.</p>
+
+    <h2>What it does.</h2>
+    <p>Type any ticker. Within a couple of seconds you get the live price, market cap, and P/E ratio you'd expect — alongside the metrics most consumer apps skip:</p>
+    <ul>
+      <li><strong>Sharpe ratio</strong> — risk-adjusted return, calculated against the risk-free rate</li>
+      <li><strong>Maximum drawdown</strong> — the worst peak-to-trough fall over the lookback window</li>
+      <li><strong>Volatility measures</strong> — annualised standard deviation of returns</li>
+      <li><strong>Percentage moves</strong> across multiple horizons</li>
+    </ul>
+    <p>Everything renders in a layout designed to be readable on a phone, not a Bloomberg terminal.</p>
+
+    <h2>How it's built.</h2>
+    <h3>iOS client (Swift)</h3>
+    <p>The mobile app is built natively in Swift. It handles the UI, request orchestration, and a local cache to keep things responsive when the user re-queries the same ticker within a session. Native rather than cross-platform was a deliberate choice — financial UIs benefit from feeling fast and tight, and Swift gives me direct control over animations, scroll behaviour, and gesture handling.</p>
+
+    <h3>Backend (FastAPI on Fly.io)</h3>
+    <p>The backend is a FastAPI service in Python, deployed on Fly.io. When the iOS client requests a ticker, the backend pulls the underlying data from <code>yfinance</code>, computes the derived metrics server-side, and returns a single structured response. Doing the maths on the backend means the iOS app stays simple — it renders, it doesn't compute.</p>
+
+    <h3>Caching</h3>
+    <p>Live market data calls are not free, and Yahoo's endpoint is flaky under load. I added a backend caching layer with sensible TTLs so that:</p>
+    <ul>
+      <li>Repeated queries for the same ticker within a short window don't hammer the upstream API</li>
+      <li>Latency on cache hits drops to near-zero</li>
+      <li>The app degrades gracefully when Yahoo rate-limits</li>
+    </ul>
+
+    <p class="pullquote">"The interesting work wasn't writing Swift. It was deciding what computation belonged on the client, what belonged on the server, and what could be cached."</p>
+
+    <h2>What I'd do differently.</h2>
+    <p>If I were starting over today, three things would change:</p>
+    <ul>
+      <li><strong>Move off <code>yfinance</code></strong>. It's free and easy but rate-limited and unofficial. A proper paid data source (IEX Cloud, Polygon) would be more reliable and let me offer intraday granularity.</li>
+      <li><strong>Add a proper test suite</strong>. The metric calculations are pure functions — they're crying out to be tested with property-based tests. I'd reach for <code>pytest</code> + <code>hypothesis</code> next time.</li>
+      <li><strong>Containerise it</strong>. Right now the backend deploys directly via Fly's buildpacks. A proper Docker image with a CI pipeline would make the deployment story cleaner and the project more portable.</li>
+    </ul>
+
+    <h2>What it taught me.</h2>
+    <p>This project is the most concrete example I have of owning something end-to-end — UI, backend, deployment, App Store submission, post-launch updates. I'd built things before in coursework. This was the first time I'd shipped a product to a public store and watched it go through review. The non-engineering parts (App Store guidelines, signing certificates, screenshots, metadata) turned out to be a substantial chunk of the work — and a part of "shipping software" that university courses simply don't cover.</p>
+  </article>
+
+  <div class="case-footer">
+    <a href="index.html#work" class="case-footer-link">
+      <span class="mono">Index</span>
+      All work →
+    </a>
+    <a href="dissertation.html" class="case-footer-link">
+      <span class="mono">Next</span>
+      Investing for Everyone →
+    </a>
+  </div>
+
+  <footer>© 2026 · HENRY FORREST</footer>
+
+</body>
+</html>

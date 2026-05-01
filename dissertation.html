@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dissertation — Case Study · Henry Forrest</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="case.css" />
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-name">Henry Forrest</a>
+      <a href="index.html#work" class="nav-back">← All Work</a>
+    </div>
+  </nav>
+
+  <article>
+    <div class="case-eyebrow">Dissertation · 2025</div>
+    <h1>A web platform that gets more people <em>investing</em> — without asking them to learn the markets first.</h1>
+    <p class="case-lede">My final-year dissertation. An end-to-end product: a reinforcement learning agent that handles the trading, a Flet web app that handles the user, and a glossary that handles the bit nobody likes — the jargon.</p>
+
+    <div class="case-meta">
+      <div>
+        <div class="case-meta-label">Programme</div>
+        <div class="case-meta-value">BSc Computer Science, Exeter</div>
+      </div>
+      <div>
+        <div class="case-meta-label">Stack</div>
+        <div class="case-meta-value">Python, Flet, PPO</div>
+      </div>
+      <div>
+        <div class="case-meta-label">Data</div>
+        <div class="case-meta-value">Yahoo Finance, Alpha Vantage</div>
+      </div>
+    </div>
+
+
+    <h2>Why I built it.</h2>
+    <p>The UK has a quiet financial problem. Most people here don't invest — they keep their money in cash, watch inflation eat it, and then assume the stock market is something for other people. The two big reasons I kept hearing from friends and family were the same: <strong>"I don't know what I'm doing"</strong> and <strong>"I don't have time to keep track of it."</strong></p>
+    <p>So I tried to build something that took both reasons off the table. A web app where you put money in (simulated, in this case), an AI agent handles the trading on your behalf, and the bits you do want to learn — what a P/E ratio is, what a dividend actually does — are right there on the same site, written for someone seeing them for the first time.</p>
+
+    <p class="pullquote">"More people investing is good for everyone. The barriers aren't really intelligence — they're confidence and time. Both are solvable."</p>
+
+    <h2>What it does.</h2>
+    <p>The platform has three connected pieces:</p>
+
+    <h3>1. The web app</h3>
+    <p>Built in Flet — the Python framework that compiles to Flutter. Users create an account, "deposit" simulated funds, and watch the agent trade on their behalf. Their portfolio updates in real time, with a clean dashboard showing positions, returns, and the agent's recent decisions. Building it in Flet meant I could keep the whole stack in Python and ship a real interactive UI without dropping into a separate frontend framework.</p>
+
+    <h3>2. The agent</h3>
+    <p>A reinforcement learning agent using Proximal Policy Optimisation (PPO), trained on historical S&amp;P 500 data from Yahoo Finance and Alpha Vantage. It makes daily binary decisions — be in the market, or be in cash — with the goal of buying dips and selling near peaks. PPO over DQN because the dynamics are non-stationary and the policy-gradient approach is more stable on financial environments where reward variance is brutal.</p>
+
+    <h3>3. The educational layer</h3>
+    <p>A finance glossary plus a couple of explainer pages. The glossary covers the terms that show up when people first try to engage with markets — P/E, market cap, dividend, yield, drawdown — written in the kind of language someone would actually use to explain it to a friend. The point isn't to turn users into analysts. It's to make the dashboard they're looking at less foreign.</p>
+
+    <h2>The honest result on the agent.</h2>
+    <p>In backtesting, the agent matched buy-and-hold roughly. It didn't blow up, it didn't beat the index, it broadly tracked it.</p>
+    <p>This is, on reflection, exactly what efficient market theory would predict. The S&amp;P 500 is the most analysed time series on Earth. Any short-term timing edge available from raw price action has long since been arbitraged out by people with vastly more compute, data, and infrastructure than a final-year dissertation can muster.</p>
+    <p>What the agent <strong>did</strong> demonstrate:</p>
+    <ul>
+      <li>It learned <em>something</em> — it didn't behave randomly, and its policy responded sensibly to features like trailing volatility and drawdown depth</li>
+      <li>It avoided catastrophic positioning — it didn't, for instance, go long during March 2020 and ride the entire Covid drawdown</li>
+      <li>The training pipeline was stable, reproducible, and tunable</li>
+    </ul>
+    <p>For the broader product question — whether an agent like this is the right thing to put in front of new investors — the more interesting answer is that <em>matching the index is honestly fine</em>. A simple index strategy beats most active retail behaviour anyway. The interesting product work was never going to be in a magic alpha-generating algorithm.</p>
+
+    <h2>What I'd do differently.</h2>
+    <ul>
+      <li><strong>Lean further into the educational side.</strong> The glossary was the part users responded to most. With more time I'd have built a proper learn-as-you-go layer, surfacing definitions inline as people clicked through the dashboard.</li>
+      <li><strong>Pick a less efficient market for the agent.</strong> The S&amp;P 500 was the wrong target if I wanted to demonstrate timing edge. Small-cap equities or specific commodities would have given more signal to learn from.</li>
+      <li><strong>Cleaner backtesting hygiene.</strong> Lookahead bias is the cardinal sin of quant projects. I was careful, but a more rigorous walk-forward methodology would strengthen the result.</li>
+      <li><strong>Consider whether the agent is even the right answer.</strong> A passive index tracker plus the educational layer might do more for the actual mission than a clever RL agent ever will.</li>
+    </ul>
+
+    <h2>What it taught me.</h2>
+    <p>This was the first project where I had to think about a real product, not just an algorithm. The agent was the bit I was being graded on, but the web app was the bit that mattered for the thing I actually cared about. Most of the decisions I'm proudest of weren't in the reward function — they were in the dashboard layout, the glossary tone, and the question of how much complexity to hide from someone seeing their portfolio for the first time.</p>
+    <p>It also gave me the foundation for what came next. The trading-adjacent thinking that runs through <a href="market-brief.html">Market Brief</a> is a direct downstream effect — the same instinct, applied to a different problem.</p>
+  </article>
+
+  <div class="case-footer">
+    <a href="market-brief.html" class="case-footer-link">
+      <span class="mono">Previous</span>
+      ← Market Brief
+    </a>
+    <a href="perfect-circle.html" class="case-footer-link">
+      <span class="mono">Next</span>
+      Perfect Circle →
+    </a>
+  </div>
+
+  <footer>© 2026 · HENRY FORREST</footer>
+
+</body>
+</html>
