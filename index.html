@@ -2,538 +2,582 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Henry Forrest</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Henry Forrest — software engineer building AI-driven products, with a strong interest in finance and markets." />
+  <title>Henry Forrest — Software Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <style>
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body { font-family: 'Segoe UI', sans-serif; color: #fff; background: #121212; }
+    :root {
+      --bg: #f5f1ea;
+      --bg-alt: #ede6da;
+      --ink: #1a1613;
+      --ink-soft: #4a4239;
+      --ink-muted: #8a8175;
+      --rule: #d9d0bf;
+      --accent: #b8451f;
+      --accent-soft: #d96a3f;
+      --paper: #fbf8f2;
+      --max: 1180px;
+    }
 
-    nav {
-      position: fixed;
-      top: 0; left: 0; width: 100%;
-      background: rgba(0, 0, 0, 0.6);
-      padding: 1rem;
-      display: flex;
-      justify-content: center;
-      z-index: 1000;
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      font-weight: 400;
+      font-size: 17px;
+      line-height: 1.65;
+      color: var(--ink);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
     }
-    nav a {
-      color: #ff4d4d;
-      margin: 0 1rem;
-      text-decoration: none;
-      font-weight: bold;
-      transition: color 0.3s;
-    }
-    nav a:hover {
-      color: #ff8080;
+
+    h1, h2, h3, h4 {
+      font-family: 'Fraunces', Georgia, serif;
+      font-weight: 400;
+      letter-spacing: -0.015em;
+      color: var(--ink);
     }
 
     a {
-      color: #ff4d4d;
+      color: var(--ink);
       text-decoration: none;
-      transition: color 0.3s ease;
+      transition: color 0.2s ease;
     }
-    a:hover {
-      color: #ff8080;
-    }
+    a:hover { color: var(--accent); }
 
-    header {
-      position: relative;
-      height: 100vh;
+    .mono { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 0.85em; }
+
+    /* ===== NAV ===== */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(245, 241, 234, 0.85);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--rule);
+    }
+    .nav-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 1.25rem 2rem;
       display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      background: #1e1e1e;
-      overflow: hidden;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 2rem;
     }
-    header::after {
-      content: "";
-      position: absolute;
-      top: -20%; left: -20%;
-      width: 140%; height: 140%;
-      background: radial-gradient(circle, rgba(255, 77, 77, 0.2), transparent);
-      animation: blob 15s infinite ease-in-out;
-      z-index: 0;
+    .nav-name {
+      font-family: 'Fraunces', serif;
+      font-size: 1.05rem;
+      font-weight: 500;
+      font-style: italic;
     }
-    h1 {
-      font-size: 3rem; white-space: nowrap;
-      border-right: 4px solid rgba(255,255,255,0.75);
-      overflow: hidden;
-      animation: typing 4s steps(30), blink .75s step-end infinite;
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      font-size: 0.92rem;
+      color: var(--ink-soft);
     }
-    @keyframes typing {
-      from { width: 0; }
-      to { width: 18ch; }
-    }
-    @keyframes blink {
-      50% { border-color: transparent; }
-    }
-    @keyframes blob {
-      0%, 100% { transform: translate(0, 0) scale(1); }
-      50% { transform: translate(20px, -30px) scale(1.1); }
-    }
+    .nav-links a:hover { color: var(--accent); }
 
+    /* ===== HERO ===== */
+    .hero {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 7rem 2rem 5rem;
+    }
+    .hero-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--ink-muted);
+      margin-bottom: 2.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      width: 28px;
+      height: 1px;
+      background: var(--ink-muted);
+    }
+    .hero h1 {
+      font-size: clamp(2.6rem, 6vw, 5rem);
+      line-height: 1.05;
+      font-weight: 300;
+      max-width: 16ch;
+      margin-bottom: 2.5rem;
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--accent);
+      font-weight: 400;
+    }
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2.5rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--rule);
+      max-width: 720px;
+    }
+    .hero-meta-item {
+      flex: 1;
+      min-width: 200px;
+    }
+    .hero-meta-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--ink-muted);
+      margin-bottom: 0.5rem;
+    }
+    .hero-meta-value { color: var(--ink-soft); font-size: 0.95rem; }
+    .hero-meta-value a { border-bottom: 1px solid var(--rule); padding-bottom: 1px; }
+    .hero-meta-value a:hover { border-bottom-color: var(--accent); }
+
+    /* ===== SECTION SHARED ===== */
     section {
-      min-height: 100vh;
-      padding: 6rem 2rem;
-      max-width: 1000px;
-      margin: auto;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 5rem 2rem;
     }
-    section.visible {
-      opacity: 1;
-      transform: translateY(0);
+    .section-head {
+      display: flex;
+      align-items: baseline;
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--rule);
+    }
+    .section-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--ink-muted);
+      letter-spacing: 0.1em;
+    }
+    .section-head h2 {
+      font-size: clamp(1.6rem, 3vw, 2.1rem);
+      font-style: italic;
+      font-weight: 400;
     }
 
-    h2 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-      border-bottom: 2px solid #ff4d4d;
-      display: inline-block;
-    }
-
-    .about-container {
+    /* ===== WORK / PROJECTS ===== */
+    .work-list {
       display: flex;
       flex-direction: column;
-      gap: 2rem;
-      align-items: center;
     }
-
-    .about-text {
-      flex: 1;
-    }
-
-    .about-image {
-      flex: 1;
-    }
-
-    .about-image img {
-      max-width: 300px;
-      border-radius: 50%;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-    }
-
-    @media (min-width: 768px) {
-      .about-container {
-        flex-direction: row;
-        align-items: flex-start;
-      }
-      .about-image {
-        display: flex;
-        /* justify-content: flex-end; */
-      }
-    }
-
-    .projects {
+    .work-item {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      grid-template-columns: 80px 1fr auto;
       gap: 2rem;
-      margin-top: 0.5rem;
+      padding: 2.5rem 0;
+      border-bottom: 1px solid var(--rule);
+      align-items: start;
+      transition: padding 0.3s ease;
     }
-
-    .card {
-      background: #1f1f1f;
-      padding: 1.5rem;
-      border-radius: 12px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.4);
-      transition: transform 0.3s ease, background 0.3s;
-      cursor: pointer;
-      position: relative;
-      overflow: hidden;
-    }
-    .card:hover {
-      transform: translateY(-8px);
-      background: #2e2e2e;
-    }
-    .card .card-expanded {
-      display: none; /* Hide in card, only show in modal */
-    }
-    .tags {
-      color: #ff4d4d;
+    .work-item:hover { padding-left: 0.75rem; }
+    .work-item:hover .work-arrow { transform: translateX(4px); color: var(--accent); }
+    .work-year {
+      font-family: 'JetBrains Mono', monospace;
       font-size: 0.85rem;
-      margin-top: 0.5rem;
+      color: var(--ink-muted);
+      padding-top: 0.4rem;
+    }
+    .work-body { max-width: 640px; }
+    .work-title {
+      font-family: 'Fraunces', serif;
+      font-size: 1.7rem;
+      font-weight: 400;
+      margin-bottom: 0.5rem;
+      line-height: 1.2;
+    }
+    .work-title a:hover { color: var(--accent); }
+    .work-desc {
+      color: var(--ink-soft);
+      margin-bottom: 1rem;
+      font-size: 1rem;
+    }
+    .work-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 1rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--ink-muted);
+      letter-spacing: 0.04em;
+    }
+    .work-tags span::before { content: '— '; }
+    .work-arrow {
+      font-family: 'Fraunces', serif;
+      font-size: 1.4rem;
+      color: var(--ink-muted);
+      transition: all 0.3s ease;
+      padding-top: 0.4rem;
     }
 
+    @media (max-width: 720px) {
+      .work-item { grid-template-columns: 1fr; gap: 0.5rem; }
+      .work-arrow { display: none; }
+      .work-year { padding-top: 0; }
+    }
+
+    /* ===== ABOUT ===== */
+    .about {
+      background: var(--bg-alt);
+      margin: 0;
+      max-width: none;
+    }
+    .about-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 5rem 2rem;
+    }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 5rem;
+      align-items: start;
+    }
+    .about-grid h2 {
+      font-size: clamp(1.6rem, 3vw, 2.1rem);
+      font-style: italic;
+      font-weight: 400;
+    }
+    .about-text p {
+      font-size: 1.08rem;
+      color: var(--ink-soft);
+      margin-bottom: 1.5rem;
+      max-width: 60ch;
+    }
+    .about-text p:last-child { margin-bottom: 0; }
+    .about-text strong { color: var(--ink); font-weight: 500; }
+
+    @media (max-width: 720px) {
+      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+    }
+
+    /* ===== STACK ===== */
+    .stack-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2.5rem;
+    }
+    .stack-col-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--ink-muted);
+      margin-bottom: 1rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--rule);
+    }
+    .stack-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .stack-col li { color: var(--ink-soft); font-size: 0.98rem; }
+
+    /* ===== WRITING ===== */
+    .writing-list { display: flex; flex-direction: column; }
+    .writing-item {
+      padding: 2rem 0;
+      border-bottom: 1px solid var(--rule);
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      gap: 2rem;
+      align-items: baseline;
+    }
+    .writing-date {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--ink-muted);
+    }
+    .writing-title {
+      font-family: 'Fraunces', serif;
+      font-size: 1.25rem;
+      font-weight: 400;
+      color: var(--ink);
+    }
+    .writing-coming {
+      font-style: italic;
+      color: var(--ink-muted);
+      font-family: 'Fraunces', serif;
+      font-size: 1.1rem;
+    }
+
+    /* ===== CONTACT ===== */
+    .contact {
+      background: var(--ink);
+      color: var(--paper);
+      margin: 0;
+      max-width: none;
+    }
+    .contact-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 6rem 2rem;
+    }
+    .contact h2 {
+      color: var(--paper);
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      font-weight: 300;
+      line-height: 1.1;
+      max-width: 18ch;
+      margin-bottom: 3rem;
+    }
+    .contact h2 em { font-style: italic; color: var(--accent-soft); }
     .contact-grid {
       display: grid;
-      grid-template-columns: 1fr;
-      gap: 2rem;
-      color: #ccc;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2.5rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
     }
-    .contact-block {
-      background: #1f1f1f;
-      padding: 2rem;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    }
-    .contact-block h3 {
-      color: #fff;
+    .contact-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: rgba(255, 255, 255, 0.5);
       margin-bottom: 0.5rem;
-      font-size: 1.25rem;
     }
+    .contact-value { font-size: 1rem; }
+    .contact-value a { color: var(--paper); border-bottom: 1px solid rgba(255, 255, 255, 0.3); padding-bottom: 1px; }
+    .contact-value a:hover { color: var(--accent-soft); border-bottom-color: var(--accent-soft); }
 
+    /* ===== FOOTER ===== */
     footer {
-      text-align: center;
-      padding: 2rem 0;
-      font-size: 0.9rem;
-      color: #777;
-    }
-
-    @media (min-width: 768px) {
-      .contact-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    /* Modal Styles */
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.8);
-      justify-content: center;
-      align-items: center;
-      z-index: 2000;
-    }
-
-    .modal-content {
-      background: #1f1f1f;
-      color: #fff;
+      background: var(--ink);
+      color: rgba(255, 255, 255, 0.5);
       padding: 2rem;
-      border-radius: 12px;
-      width: 90%;
-      max-width: 800px;
-      max-height: 90%;
-      overflow-y: auto;
-      position: relative;
-    }
-
-    .modal-content img, .modal-content video {
-      width: 100%;
-      border-radius: 10px;
-      margin-top: 1rem;
-    }
-
-    .close {
-      position: absolute;
-      top: 10px; right: 15px;
-      font-size: 2rem;
-      cursor: pointer;
-      color: #ff4d4d;
-    }
-
-    /* Tech Logo Slider */
-    #tech-stack {
       text-align: center;
-      margin: 2rem auto 0.5rem auto;
-      padding: 0;
-      max-width: 100%;
-      min-height: auto; /* FIX: override default section height */
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
     }
 
-    #tech-stack h2 {
-      margin-bottom: 1rem;
+    /* ===== ENTRANCE ANIMATION ===== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.9s cubic-bezier(0.2, 0.7, 0.2, 1), transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
     }
-
-    .logo-slider {
-      overflow: hidden;
-      width: 100%;
-      max-width: 1000px;
-      margin: 0 auto;
-      position: relative;
-      /* FIX: fade edges */
-      -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-      -webkit-mask-repeat: no-repeat;
-      -webkit-mask-size: 100% 100%;
-      mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-      mask-repeat: no-repeat;
-      mask-size: 100% 100%;
-    }
-
-    .logo-track {
-      display: flex;
-      gap: 2rem;
-      width: max-content;
-      animation: scroll 25s linear infinite;
-    }
-
-    .logo-track img {
-      height: 50px;
-      object-fit: contain;
-      opacity: 0.9;
-      transition: transform 0.3s ease, opacity 0.3s ease;
-    }
-
-    .logo-track img:hover {
-      transform: scale(1.1);
-      opacity: 1;
-    }
-
-    @keyframes scroll {
-      0%   { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
-
-    @media (max-width: 768px) {
-      .logo-track img {
-        height: 40px;
-      }
-    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .hero .reveal:nth-child(1) { transition-delay: 0.1s; }
+    .hero .reveal:nth-child(2) { transition-delay: 0.25s; }
+    .hero .reveal:nth-child(3) { transition-delay: 0.45s; }
   </style>
 </head>
 <body>
 
   <nav>
-    <a href="#about">About</a>
-    <a href="#projects">Projects</a>
-    <a href="#contact">Contact</a>
+    <div class="nav-inner">
+      <a href="#" class="nav-name">Henry Forrest</a>
+      <div class="nav-links">
+        <a href="#work">Work</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
   </nav>
 
-  <header>
-    <h1>Hi, I’m Henry Forrest</h1>
+  <header class="hero">
+    <div class="hero-eyebrow reveal">Software Engineer · London</div>
+    <h1 class="reveal">Engineer building <em>AI-driven products</em>, with a deep interest in markets and finance.</h1>
+    <div class="hero-meta reveal">
+      <div class="hero-meta-item">
+        <div class="hero-meta-label">Now</div>
+        <div class="hero-meta-value">Junior software engineer at a London startup, building an AI receptionist agent and the mobile app that talks to it.</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hero-meta-label">Background</div>
+        <div class="hero-meta-value">Computer Science at the University of Exeter. Dissertation on reinforcement learning for trading the S&amp;P 500.</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hero-meta-label">Links</div>
+        <div class="hero-meta-value">
+          <a href="https://github.com/henryforrest" target="_blank" rel="noopener">GitHub</a> &nbsp;·&nbsp;
+          <a href="#" target="_blank" rel="noopener">LinkedIn</a> &nbsp;·&nbsp;
+          <a href="cv.pdf" target="_blank" rel="noopener">CV</a>
+        </div>
+      </div>
+    </div>
   </header>
 
-  <section id="about">
-    <h2>About Me</h2>
-    <div class="about-container">
-      <div class="about-image">
-        <img src="pic.jpg" alt="Henry Forrest portrait" />
-      </div>
-      <div class="about-text">
-        <p>
-          I’m Henry Forrest — a Computer Science BSc (Hons) graduate from the University of Exeter, where I achieved a 2:1 (69%). I’m passionate about creating innovative software solutions, particularly in areas like AI, algorithmic trading, and interactive web design.
-          <br><br>
-          As a curious and driven Computer Scientist with an interest in both technology and finance, I am searching for opportunities that challenge me, and allow me to solve meaningful problems. I enjoy working in a team setting which allows me to collaborate with and learn from others. I aspire to grow into a role in which I am able to combine my technical and strategic skills - ideally in software. 
-          <br><br>
-          I’ve developed a wide range of projects over my years studying computer science — including games, full-stack platforms, and deep learning applications — many of which you can explore below.
-          <br><br>
-          For any enquiries, please feel free to contact me directly.
-        </p>
-        <br><br>
-        <a href="cv.pdf" target="_blank">Download My CV</a>
-      </div>
+  <section id="work">
+    <div class="section-head">
+      <span class="section-num">01 / Selected Work</span>
+      <h2>Things I've built.</h2>
     </div>
-  </section>
+    <div class="work-list">
 
-  <section id="tech-stack">
-    <h2>Tech Stack</h2>
-    <div class="logo-slider">
-      <div class="logo-track">
-        <img src="logos/python.png" alt="Python">
-        <img src="logos/js.png" alt="JavaScript">
-        <img src="logos/react.png" alt="React">
-        <img src="logos/django.png" alt="Django">
-        <img src="logos/html.png" alt="HTML5">
-        <img src="logos/css.png" alt="CSS3">
-        <img src="logos/git.png" alt="Git">
-        <img src="logos/github.png" alt="GitHub">
-        <img src="logos/mysql.png" alt="MySQL">
-        <img src="logos/vscode.png" alt="VSCode">
-        <img src="logos/flask.png" alt="Flask">
-        <!-- duplicate for infinite scroll -->
-        <img src="logos/python.png" alt="Python">
-        <img src="logos/js.png" alt="JavaScript">
-        <img src="logos/react.png" alt="React">
-        <img src="logos/django.png" alt="Django">
-        <img src="logos/html.png" alt="HTML5">
-        <img src="logos/css.png" alt="CSS3">
-        <img src="logos/git.png" alt="Git">
-        <img src="logos/github.png" alt="GitHub">
-        <img src="logos/mysql.png" alt="MySQL">
-        <img src="logos/vscode.png" alt="VSCode">
-        <img src="logos/flask.png" alt="Flask">
-      </div>
-    </div>
-  </section>
-
-  <section id="projects">
-    <h2>Projects</h2>
-    <div class="card">
-      <h3>Market Brief</h3>
-      <p>An iOS financial analysis application delivering structured equity insights and AI-generated market summaries.</p>
-      <div class="tags">Swift • iOS • Python • REST APIs • yFinance • Hugging Face</div>
-      <a href="https://apps.apple.com/us/app/market-brief-investing/id6758671631">View in App Store</a>
-      <div class="card-expanded">
-        <p>Market Brief is a native iOS application built in Swift that provides structured, data-driven analysis of individual equity tickers. Users can input a stock symbol and instantly access key financial metrics including market capitalisation, price data, volatility measures, and percentage movements. 
-        
-        The application is supported by a custom Python backend, which handles API requests, retrieves live market data via yFinance, and processes structured financial metrics. For qualitative insight, the backend integrates with the Hugging Face API to generate an AI-powered overview summarising the company’s current market position.
-        
-        The project demonstrates full-stack architecture design, REST API integration, backend data orchestration, and applied AI within a financial context — combining native iOS development with server-side intelligence to deliver a seamless analytical tool.</p>
-      </div>
-    </div>
-    <div class="projects">   
-      <div class="card">
-        <h3>Perfect Circle</h3>
-        <p>A native iOS daily challenge game where users get one attempt per day to draw the perfect circle and compete for a score out of 100.</p>
-        <div class="tags">Swift • iOS • SwiftUI • Core Graphics • Game Logic • Local Storage</div>
-        <a href="https://apps.apple.com/us/app/perfect-circle-challenge/id6759292093">View in App Store</a>
-        <div class="card-expanded">
-          <p>Perfect Circle is a native iOS game built in Swift that challenges users to draw the most accurate circle possible — with only one attempt allowed per day. Using touch input tracking and geometric analysis, the app evaluates each drawing and generates a precision score out of 100 based on circular symmetry and deviation from an ideal radius.
-          
-          Players can review all of their previous attempts, track performance over time, and work towards achievement-based goals such as hitting a perfect 100 or maintaining consecutive-day streaks. The one-try-per-day mechanic introduces scarcity and behavioural engagement, encouraging consistency and long-term retention.
-          
-          The project demonstrates mobile game logic design, gesture recognition handling, geometric scoring algorithms, state persistence, and user engagement mechanics — packaged in a clean, responsive native iOS experience.</p>
-        </div>
-      </div>
-      <div class="card">
-        <h3>The Cube Game</h3>
-        <p>A 3D mobile cube with a new minigame on each face. Play daily, earn scores, and compete on global leaderboards in quick, addictive challenges.</p>
-        <div class="tags">JS • HTML • React Native • Game Dev </div>
-        <a href="https://github.com/henryforrest/The_Cube_Game">View on Github</a>
-        <div class="card-expanded">
-          <p>Using JS and React Native I’m developing a 3D interactive cube where each face unlocks a different minigame. Players can rotate the cube and take on daily challenges ranging from quick reflex tests like the Ball Game to social mind games such as The Opposite Game. Each minigame can only be played once per day, giving players a score that contributes both to their individual game result and to a combined total across all cube faces. With global leaderboards, the Cube Game blends fun, addictive mechanics with competitive replay value, encouraging players to return daily and climb the rankings.</p>
-        </div>
-      </div>
-      <div class="card">
-        <h3>Dissertation</h3>
-        <p>Investment platform for beginner users integrating machine learning agents.</p>
-        <div class="tags">Flet • Python • ML</div>
-        <a href="https://github.com/henryforrest/AI_Investing">View on Github</a>
-        <br>
-        <a href="https://ai-investing.onrender.com/">View</a>
-        <div class="card-expanded">
-            <p>Developed a fully functional web application for beginner investors to explore investment concepts and use machine learning agents for simulated trading. Utilises Flet for the front-end interface and Python-based ML models to analyse financial data and make automated portfolio decisions. Features educational resources, interactive dashboards, and real-time predictions.</p>
-        </div>
-      </div>
-      <div class="card">
-        <h3>Pygame Angry Birds</h3>
-        <p>Physics-based game simulating projectile motion and structural collisions.</p>
-        <div class="tags">Python • Game Dev</div>
-        <a href="https://github.com/henryforrest/angry_birds_game">View on Github</a>
-        <div class="card-expanded">
-            <p>Developed an Angry Birds-inspired game featuring real-time projectile physics, trajectory calculations, and collision detection for destructible structures. Includes multiple levels, interactive power-ups, and dynamic gameplay mechanics built with Pygame.</p>
-            <img src="angrybirds.png" alt="Angry Birds Game Preview" />
-        </div>
-        </div>
-        <div class="card">
-            <h3>Alexa</h3>
-            <p>Custom voice assistant built with Flask, APIs, and microservices.</p>
-            <div class="tags">Python • Flask</div>
-            <a href="https://github.com/henryforrest/Alexa">View on Github</a>
-            <div class="card-expanded">
-                <p>Implemented a functional Alexa-style voice assistant leveraging Flask and microservices architecture. Integrates multiple APIs to handle speech-to-text conversion, natural language processing, and text-to-speech output, enabling seamless interactive voice responses.</p>
+      <a href="market-brief.html" class="work-item-link">
+        <article class="work-item">
+          <div class="work-year">2026</div>
+          <div class="work-body">
+            <h3 class="work-title">Market Brief</h3>
+            <p class="work-desc">A native iOS app on the App Store. Type a ticker, get the metrics that actually matter — Sharpe ratio, max drawdown, P/E, market cap — alongside live price data. Backed by a Python service I built and deployed.</p>
+            <div class="work-tags">
+              <span>Swift / iOS</span>
+              <span>FastAPI</span>
+              <span>Fly.io</span>
+              <span>Live on App Store</span>
             </div>
-        </div>
-        <div class="card">
-          <h3>Supervised learning project</h3>
-          <p>First time using supervised learning, made a model to predict credit card defaults with over 82% accuracy.</p>
-          <div class="tags">Python • Tensorflow • Numpy </div>
-          <a href="https://github.com/henryforrest/credit_card_default/tree/main">View on Github</a>
-          <div class="card-expanded">
-              <p>Artificial Neural Network (ANN) model for predicting credit card defaults utilizing a given dataset. The model architecture features a feed-forward neural network with two dense layers and dropout layers. Early stopping was implemented to prevent over-fitting, optimizing the model’s generalization performance.</p>
           </div>
-        </div>
-        <div class="card">
-            <h3>Pygame Basketball</h3>
-            <p>Interactive game simulating basketball shooting mechanics.</p>
-            <div class="tags">Python • Game Dev</div>
-            <a href="https://github.com/henryforrest/basketball_game">View on Github</a>
-            <div class="card-expanded">
-                <p>Created a Pygame-based basketball simulation where users aim and shoot balls into a hoop to score points. Incorporates basic physics for ball trajectory, collision detection, and scoring mechanics, providing an engaging interactive experience.</p>
+          <div class="work-arrow">→</div>
+        </article>
+      </a>
+
+      <a href="dissertation.html" class="work-item-link">
+        <article class="work-item">
+          <div class="work-year">2025</div>
+          <div class="work-body">
+            <h3 class="work-title">Investing for Everyone</h3>
+            <p class="work-desc">My final-year dissertation. A web app that lets new investors deposit (simulated) funds and have an AI agent trade for them — with a built-in glossary and explainers to demystify the markets along the way.</p>
+            <div class="work-tags">
+              <span>Python / Flet</span>
+              <span>Reinforcement Learning</span>
+              <span>Financial Inclusion</span>
+              <span>Live</span>
             </div>
-        </div>
-        <div class="card">
-            <h3>Ticket Marketplace</h3>
-            <p>Django-based platform for buying and selling club night tickets.</p>
-            <div class="tags">Web • Python • SQL</div>
-            <a href="https://github.com/henryforrest/ticket_marketplace">View on Github</a>
-            <div class="card-expanded">
-                <p>Built a web marketplace for club tickets using Django, featuring user authentication, ticket listings, and a SQL database backend for data management. Enables users to list, browse, and purchase tickets. The project integrates front-end interactivity with back-end functionality, including search filters and data validation. (Work in progress)</p>
+          </div>
+          <div class="work-arrow">→</div>
+        </article>
+      </a>
+
+      <a href="perfect-circle.html" class="work-item-link">
+        <article class="work-item">
+          <div class="work-year">2025</div>
+          <div class="work-body">
+            <h3 class="work-title">Perfect Circle</h3>
+            <p class="work-desc">A daily-challenge iOS game on the App Store. One attempt a day to draw a perfect circle, scored out of 100 by geometric analysis. Streaks, history, no ads — just the mechanic.</p>
+            <div class="work-tags">
+              <span>Swift / SwiftUI</span>
+              <span>Core Graphics</span>
+              <span>Game Logic</span>
+              <span>Live on App Store</span>
             </div>
-        </div>
-        <div class="card">
-            <h3>2D Platformer Game</h3>
-            <p>Browser-based 2D platformer developed with JavaScript and Kaboom.js.</p>
-            <div class="tags">Web • JavaScript</div>
-            <a href="https://github.com/henryforrest/">View on Github</a>
-            <div class="card-expanded">
-                <p>Designed and implemented a two-dimensional platformer game for my EPQ project using the Kaboom.js library. Features interactive level design, collision detection, and character movement mechanics. Demonstrates skills in JavaScript-based game logic and browser game deployment.</p>
-            </div>
-        </div>
-        <div class="card">
-            <h3>Binary and Hex Calculator</h3>
-            <p>Web tool for converting numbers between binary, hexadecimal, and decimal.</p>
-            <div class="tags">Web • Maths</div>
-            <a href="calculator.html">View</a>
-            <div class="card-expanded">
-                <p>Developed a lightweight web-based calculator for GCSE and A-Level Computer Science students. Converts numbers between binary, hexadecimal, and decimal formats with instant feedback. Showcases practical application of numerical systems and front-end interactivity.</p>
-            </div>
-        </div> 
+          </div>
+          <div class="work-arrow">→</div>
+        </article>
+      </a>
+
     </div>
   </section>
 
-  <section id="contact">
-    <h2>Contact</h2>
-    <div class="contact-grid">
-      <div class="contact-block">
-        <h3>Phone</h3>
-        <p>+44 75387 68192</p>
-      </div>
-      <div class="contact-block">
-        <h3>Email</h3>
-        <p><a href="mailto:henry.forrest28@gmail.com">henry.forrest28@gmail.com</a></p>
-      </div>
-      <div class="contact-block">
-        <h3>GitHub</h3>
-        <p><a href="https://github.com/henryforrest" target="_blank">github.com/henryforrest</a></p>
-      </div>
-      <div class="contact-block">
-        <h3>Location</h3>
-        <p>Surrey, UK</p>
+  <section class="about" id="about">
+    <div class="about-inner">
+      <div class="about-grid">
+        <div class="section-head" style="margin-bottom: 0; padding-bottom: 0; border: none;">
+          <span class="section-num">02 / About</span>
+        </div>
+        <div class="about-text">
+          <h2 style="font-size: clamp(1.6rem, 3vw, 2.1rem); font-style: italic; margin-bottom: 2rem;">A short version.</h2>
+          <p>Hi, I'm Henry. I'm a software engineer based in London, currently working at a small startup where I'm building the mobile app for an AI receptionist agent. Before that I studied Computer Science at Exeter.</p>
+          <p>I've always been interested in finance as much as in software. In 2025 I split an internship between investment work and engineering at a London advisory firm — sitting in pitch meetings during the week, then building tools to automate parts of the workflow.</p>
+          <p>The stuff I most enjoy building tends to live somewhere between the two. My dissertation was a reinforcement learning trading agent. My iOS app, <strong>Market Brief</strong>, surfaces equity metrics for retail investors. I'm not picky about which side of the line a job sits on — software, finance, or anywhere they meet.</p>
+          <p>Outside of work: rugby for a local club, chess, golf, and a guitar I'm getting marginally less bad at.</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <footer>&copy; 2025 Henry Forrest</footer>
-
-  <!-- Modal -->
-  <div id="cardModal" class="modal">
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <div id="modal-body"></div>
+  <section id="stack">
+    <div class="section-head">
+      <span class="section-num">03 / Stack</span>
+      <h2>Tools I reach for.</h2>
     </div>
-  </div>
+    <div class="stack-grid">
+      <div class="stack-col">
+        <div class="stack-col-label">Languages</div>
+        <ul>
+          <li>Python</li>
+          <li>Swift</li>
+          <li>JavaScript / TypeScript</li>
+          <li>SQL</li>
+          <li>Java, C, C++</li>
+        </ul>
+      </div>
+      <div class="stack-col">
+        <div class="stack-col-label">Frameworks</div>
+        <ul>
+          <li>FastAPI</li>
+          <li>React Native</li>
+          <li>SwiftUI</li>
+          <li>Flask · Django</li>
+        </ul>
+      </div>
+      <div class="stack-col">
+        <div class="stack-col-label">Cloud &amp; Data</div>
+        <ul>
+          <li>AWS (DynamoDB, Cognito)</li>
+          <li>Fly.io</li>
+          <li>Pandas · NumPy</li>
+        </ul>
+      </div>
+      <div class="stack-col">
+        <div class="stack-col-label">Currently learning</div>
+        <ul>
+          <li>Docker</li>
+          <li>AWS Solutions Architect</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="contact-inner">
+      <h2>Get in <em>touch</em>.</h2>
+      <div class="contact-grid">
+        <div>
+          <div class="contact-label">Email</div>
+          <div class="contact-value"><a href="mailto:henry.forrest28@gmail.com">henry.forrest28@gmail.com</a></div>
+        </div>
+        <div>
+          <div class="contact-label">Phone</div>
+          <div class="contact-value">+44 7538 768192</div>
+        </div>
+        <div>
+          <div class="contact-label">GitHub</div>
+          <div class="contact-value"><a href="https://github.com/henryforrest" target="_blank" rel="noopener">github.com/henryforrest</a></div>
+        </div>
+        <div>
+          <div class="contact-label">Location</div>
+          <div class="contact-value">London, UK</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>© 2026 · HENRY FORREST</footer>
 
   <script>
-    // Intersection Observer for sections
-    const obs = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) e.target.classList.add('visible');
-      });
-    }, { threshold: 0.2 });
-    document.querySelectorAll('section').forEach(sec => obs.observe(sec));
-
-    // Modal functionality
-    const modal = document.getElementById('cardModal');
-    const modalBody = document.getElementById('modal-body');
-    const closeBtn = document.querySelector('.close');
-
-    document.querySelectorAll('.card').forEach(card => {
-      card.addEventListener('click', () => {
-        const title = card.querySelector('h3')?.outerHTML || '';
-        const desc = card.querySelector('p')?.outerHTML || '';
-        const tags = card.querySelector('.tags')?.outerHTML || '';
-        const extra = card.querySelector('.card-expanded')?.innerHTML || '';
-        modalBody.innerHTML = title + desc + tags + extra;
-        modal.style.display = 'flex';
-      });
+    // Wrap project links so the entire row is clickable
+    document.querySelectorAll('.work-item-link').forEach(link => {
+      link.style.display = 'block';
+      link.style.color = 'inherit';
     });
 
-    closeBtn.addEventListener('click', () => {
-      modal.style.display = 'none';
-      modalBody.innerHTML = '';
-    });
-
-    window.addEventListener('click', (e) => {
-      if (e.target === modal) {
-        modal.style.display = 'none';
-        modalBody.innerHTML = '';
-      }
+    // Reveal on scroll + immediate hero reveal
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+    // Hero items reveal immediately on load
+    requestAnimationFrame(() => {
+      document.querySelectorAll('.hero .reveal').forEach(el => el.classList.add('visible'));
     });
   </script>
 </body>
