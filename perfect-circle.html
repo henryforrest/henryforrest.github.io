@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Perfect Circle — Case Study · Henry Forrest</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="case.css" />
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-name">Henry Forrest</a>
+      <a href="index.html#work" class="nav-back">← All Work</a>
+    </div>
+  </nav>
+
+  <article>
+    <div class="case-eyebrow">Case Study · 2025</div>
+    <h1>Perfect Circle — one chance a day to draw a <em>perfect</em> circle.</h1>
+    <p class="case-lede">A daily-challenge iOS game built around a simple, sticky idea: one attempt per day, one geometric scoring algorithm, no ads, no tutorials.</p>
+
+    <div class="case-meta">
+      <div>
+        <div class="case-meta-label">Role</div>
+        <div class="case-meta-value">Solo developer</div>
+      </div>
+      <div>
+        <div class="case-meta-label">Stack</div>
+        <div class="case-meta-value">Swift, SwiftUI, Core Graphics</div>
+      </div>
+      <div>
+        <div class="case-meta-label">Status</div>
+        <div class="case-meta-value">Live on App Store</div>
+      </div>
+      <div>
+        <div class="case-meta-label">Link</div>
+        <div class="case-meta-value"><a href="https://apps.apple.com/us/app/perfect-circle-challenge/id6759292093" target="_blank" rel="noopener">Download →</a></div>
+      </div>
+    </div>
+
+    <h2>The idea.</h2>
+    <p>I wanted to build something small and shippable in the spirit of the daily-puzzle wave (Wordle, Connections, the New York Times games). One mechanic, one attempt a day, no monetisation pressure, just a thing you might open with your morning coffee.</p>
+    <p>The mechanic: <strong>draw the most perfect circle you can with your finger</strong>. The app scores it from 0 to 100. You get one shot per day. That's the whole game.</p>
+
+    <h2>The interesting bit: how do you score a circle?</h2>
+    <p>The naive answer is to fit a circle to the user's drawn points and measure deviation. That's roughly what I do, but the details matter:</p>
+    <ul>
+      <li>I capture the touch points as the user drags, then compute the centroid and the mean radius from that centroid</li>
+      <li>The <strong>standard deviation of the radii</strong> across all points is the core measure of "circularity" — a perfect circle has zero deviation, a wobbly one has a lot</li>
+      <li>I normalise the deviation against the mean radius so that small circles and large circles are scored on the same scale</li>
+      <li>The final score is mapped onto a 0–100 range with a curve that makes 90+ feel earned and a perfect 100 vanishingly rare</li>
+    </ul>
+    <p>The scoring tuning was the part I underestimated. Make the algorithm too forgiving and everyone scores 95+ and the game feels meaningless. Too harsh and players feel cheated. Most of the polish work was iterating on the curve until "I drew a really good circle and got 87" felt fair.</p>
+
+    <p class="pullquote">"Most of the polish was iterating on the scoring curve until 'I drew a really good circle and got 87' felt fair, not punitive."</p>
+
+    <h2>The features that mattered.</h2>
+    <ul>
+      <li><strong>One attempt per day.</strong> Enforced via local persistence with a calendar-day reset. Scarcity is the whole point — without it, players burn out in ten minutes.</li>
+      <li><strong>Streaks.</strong> Consecutive-day participation, broken if you skip. Standard daily-puzzle mechanic, and it works.</li>
+      <li><strong>History.</strong> Players can see all their past attempts and scores, so the daily session has weight.</li>
+      <li><strong>Achievements.</strong> Hitting 100, hitting streak milestones — the small carrots that keep people opening the app.</li>
+    </ul>
+
+    <h2>What I'd do differently.</h2>
+    <ul>
+      <li><strong>Add a global leaderboard.</strong> The single most-requested feature, and the one I cut to keep the scope small. Adding it would have meant a backend, accounts, and moderation — all reasonable, none small.</li>
+      <li><strong>Better scoring transparency.</strong> Players sometimes don't understand why a circle that "looks fine" scored low. A small post-attempt breakdown showing the actual centroid and radius variance would help.</li>
+      <li><strong>Use it as a CI/CD playground.</strong> This was a perfect candidate for setting up Fastlane and proper App Store automation. Instead, I shipped manually each release. Lesson learnt for the next iOS project.</li>
+    </ul>
+
+    <h2>Why it's on this site.</h2>
+    <p>Compared to <a href="market-brief.html">Market Brief</a> or my <a href="dissertation.html">dissertation</a>, this is a smaller project. It's here because shipping <em>two</em> apps to the App Store as a graduate is a different signal than shipping one — it shows I can identify a contained idea, build it, get it through review, and not abandon it halfway. Most engineers I know in their first job have shipped zero apps to a public store. The threshold matters.</p>
+  </article>
+
+  <div class="case-footer">
+    <a href="dissertation.html" class="case-footer-link">
+      <span class="mono">Previous</span>
+      ← Investing for Everyone
+    </a>
+    <a href="index.html#work" class="case-footer-link">
+      <span class="mono">Index</span>
+      All work →
+    </a>
+  </div>
+
+  <footer>© 2026 · HENRY FORREST</footer>
+
+</body>
+</html>
