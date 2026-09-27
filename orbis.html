@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Orbis — Case Study · Henry Forrest</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="case.css" />
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-name">Henry Forrest</a>
+      <a href="index.html#work" class="nav-back">← All Work</a>
+    </div>
+  </nav>
+
+  <article>
+    <div class="case-eyebrow">Case Study · 2026</div>
+    <h1>Orbis — contacts that <em>update themselves</em>.</h1>
+    <p class="case-lede">A private contacts app for iPhone. One profile you own, a short code you share instead of your number, and every change synced to exactly the people you chose. iOS app, Firebase backend and website, all built solo.</p>
+
+    <div class="case-meta">
+      <div>
+        <div class="case-meta-label">Role</div>
+        <div class="case-meta-value">Solo developer</div>
+      </div>
+      <div>
+        <div class="case-meta-label">Stack</div>
+        <div class="case-meta-value">SwiftUI, Firebase, TypeScript</div>
+      </div>
+      <div>
+        <div class="case-meta-label">Status</div>
+        <div class="case-meta-value">Live on App Store</div>
+      </div>
+      <div>
+        <div class="case-meta-label">Link</div>
+        <div class="case-meta-value"><a href="https://apps.apple.com/us/app/orbis-contacts/id6762083113" target="_blank" rel="noopener">Download →</a></div>
+      </div>
+    </div>
+
+    <h2>The problem.</h2>
+    <p>Phone numbers change. People move house, switch jobs, get a new email. Every time that happens the update goes out as a group text, or it doesn't go out at all and half your contacts are quietly wrong. The address book on your phone is a snapshot that starts going stale the moment you save it.</p>
+    <p>The apps that try to fix this mostly do it by uploading your entire contacts list to their servers and monetising the graph. I wanted the opposite: <strong>a contacts app where you own your profile, choose exactly who sees it, and every connection stays current without anyone doing anything</strong>.</p>
+
+    <h2>What it does.</h2>
+    <p>You create a profile once: name, phone, email, address, birthday, the things people actually need from you. Then:</p>
+    <ul>
+      <li><strong>Two profiles, one you.</strong> Every account has a Work profile and a Social profile. When you connect with someone you pick which one they see, and you can switch it later if the relationship changes.</li>
+      <li><strong>An Orbis Code instead of a number.</strong> A short, shareable code that points at your live profile. It never expires, even when everything else about you does.</li>
+      <li><strong>Mutual connections only.</strong> Nothing is shared until both sides accept. There's no "find friends" step, because the app never reads your address book.</li>
+      <li><strong>Update once, sync to everyone.</strong> Change your number and every connection sees the new one the moment you save. No mass texts.</li>
+      <li><strong>Invite links.</strong> Share a link and the recipient lands on a personalised page with your name and photo, an App Store button, and a token that connects you the moment they install. Links are multi-use, expire after seven days, and can be revoked.</li>
+      <li><strong>Tap to act.</strong> Tap a phone number to call, an email to write, an address to navigate, in whichever app you've set as your default: Phone or WhatsApp, Mail or Gmail, Apple Maps or Google Maps.</li>
+    </ul>
+    <p>Plus the small things that make an app feel finished: six colour themes with matching app icons, QR codes for in-person swaps, push notifications for requests, haptics, and account deletion that actually deletes.</p>
+
+    <h2>How it's built.</h2>
+    <h3>iOS client (SwiftUI)</h3>
+    <p>The app is native SwiftUI, around 12,000 lines across 32 files. It talks to Firebase directly for authentication, Firestore reads and image storage, and calls Cloud Functions for anything that touches more than one user's data. Deep links (universal links for share codes, invite tokens, and a cold-start path for links that arrive before the UI exists) all run through a single router, so every entry point ends up in the same place.</p>
+
+    <h3>Backend (Firebase, with Cloud Functions in TypeScript)</h3>
+    <p>Firestore holds users, connection requests and invite tokens. The important design rule is that <strong>clients can't write their own connection graph</strong>. Sending, accepting, declining and removing connections all go through callable Cloud Functions, so the server is the only thing that can make two users' documents agree. Firestore security rules back that up: a user can update their own profile but cannot touch <code>connectionIds</code> or change their code.</p>
+    <p>There are sixteen functions in total: eleven callables, three public HTTP endpoints (the personalised invite page reads its name and avatar from two of them, the website's feedback form posts to the third), and two Firestore triggers that send push notifications when a request is created or accepted.</p>
+
+    <h3>Making it hard to abuse</h3>
+    <ul>
+      <li><strong>App Check with App Attest</strong> on every callable, so only genuine builds of the app can reach the backend.</li>
+      <li><strong>Per-user rate limits</strong> on the sensitive calls (code lookups, connection requests, verification emails), with counters kept in Firestore.</li>
+      <li><strong>Invite tokens are long and random. Orbis Codes are not.</strong> Codes are short enough to read out over the phone, which makes them a bad public lookup key. So the website only personalises invite-token links; a permanent code link gets a generic page, deliberately, because a code-to-profile endpoint would let anyone enumerate names and photos.</li>
+    </ul>
+
+    <h3>The website</h3>
+    <p><a href="https://orbiscontacts.com" target="_blank" rel="noopener">orbiscontacts.com</a> is a static site on Cloudflare. It hosts the Apple App Site Association file that makes universal links work, the fallback pages for share and invite links, the legal documents that App Store Connect points at, and a feedback form wired to one of the Cloud Functions. Getting link previews right, the card you see when someone pastes an Orbis link into iMessage or LinkedIn, took more iterations than I'd like to admit.</p>
+
+    <p class="pullquote">"The app is the visible part. Most of the engineering is in deciding what a client is allowed to do, and making sure the server is the only thing that can do the rest."</p>
+
+    <h2>Deferred deep linking, without a third-party SDK.</h2>
+    <p>The hard part of invite links is the gap between "tap link" and "install app". iOS doesn't pass the URL through the App Store, and Firebase Dynamic Links, the usual answer, was shut down in 2025. The commercial alternatives all want an SDK in the app and a line on the privacy label, which runs against the whole point of Orbis.</p>
+    <p>So the invite page copies the token to the clipboard when the visitor taps the install button, and the app checks the pasteboard on first launch. iOS shows its paste prompt, the user says yes, and they're connected. The page also shows the code in plain text as a manual fallback. It's low-tech, but it's honest about what it's doing and it puts no one else's code in the binary.</p>
+
+    <h2>What I'd do differently.</h2>
+    <ul>
+      <li><strong>Ship Android alongside iOS.</strong> There's a Kotlin and Jetpack Compose port that builds and runs against the same backend, but it isn't on Google Play yet. A contacts app is a network product, and every friend on Android who can't join is a connection that never happens.</li>
+      <li><strong>Build the invite funnel first.</strong> Version 1.0 shipped with codes only, so sharing meant typing a code into a search box. Invite links, the personalised landing page and instant connect came in the third release, and they're the thing that actually gets a second person into the app.</li>
+      <li><strong>Test the rules.</strong> The security rules and the callables are the parts that matter most and the parts with no automated tests. The Firestore emulator makes rules unit tests cheap, and I'd set them up before writing a single screen next time.</li>
+      <li><strong>Automate releases.</strong> Same lesson as <a href="perfect-circle.html">Perfect Circle</a>: every build went through Xcode by hand. Fastlane next time.</li>
+    </ul>
+
+    <h2>What it taught me.</h2>
+    <p>Orbis is the first thing I've built that has a backend other people depend on. <a href="market-brief.html">Market Brief</a> has a server, but if it goes down you see stale numbers. If Orbis gets a rule wrong, someone's phone number ends up with the wrong person. That changes how you work: security rules get reviewed before features, the "delete my account" path gets tested as carefully as sign-up, and every callable starts with the question "what happens if this is called by something that isn't my app?"</p>
+    <p>It's also the project where I learnt that shipping is a loop, not an event. Four updates since launch, each driven by watching real people use it and noticing where they got stuck.</p>
+  </article>
+
+  <div class="case-footer">
+    <a href="index.html#work" class="case-footer-link">
+      <span class="mono">Index</span>
+      All work →
+    </a>
+    <a href="market-brief.html" class="case-footer-link">
+      <span class="mono">Next</span>
+      Market Brief →
+    </a>
+  </div>
+
+  <footer>© 2026 · HENRY FORREST</footer>
+
+</body>
+</html>
