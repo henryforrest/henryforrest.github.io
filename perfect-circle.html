@@ -50,26 +50,26 @@
     <p>The naive answer is to fit a circle to the user's drawn points and measure deviation. That's roughly what I do, but the details matter:</p>
     <ul>
       <li>I capture the touch points as the user drags, then compute the centroid and the mean radius from that centroid</li>
-      <li>The <strong>standard deviation of the radii</strong> across all points is the core measure of "circularity" — a perfect circle has zero deviation, a wobbly one has a lot</li>
+      <li>The <strong>mean deviation of the points from that radius</strong> is the core measure of "circularity" — a perfect circle has zero deviation, a wobbly one has a lot</li>
       <li>I normalise the deviation against the mean radius so that small circles and large circles are scored on the same scale</li>
-      <li>The final score is mapped onto a 0–100 range with a curve that makes 90+ feel earned and a perfect 100 vanishingly rare</li>
+      <li>Roundness alone isn't enough — a short, clean arc fits a circle perfectly — so a second term measures <strong>coverage</strong>: the biggest slice of the circle the stroke never visited. The score is roundness × coverage on a 0–100 scale, and the whole feel of the game lives in two tolerances</li>
     </ul>
-    <p>The scoring tuning was the part I underestimated. Make the algorithm too forgiving and everyone scores 95+ and the game feels meaningless. Too harsh and players feel cheated. Most of the polish work was iterating on the curve until "I drew a really good circle and got 87" felt fair.</p>
+    <p>The scoring tuning was the part I underestimated. Make the algorithm too forgiving and everyone scores 95+ and the game feels meaningless. Too harsh and players feel cheated. Most of the polish work was iterating on those two tolerances until "I drew a really good circle and got 87" felt fair.</p>
 
-    <p class="pullquote">"Most of the polish was iterating on the scoring curve until 'I drew a really good circle and got 87' felt fair, not punitive."</p>
+    <p class="pullquote">"Most of the polish was iterating on the scoring tolerances until 'I drew a really good circle and got 87' felt fair, not punitive."</p>
 
     <h2>The features that mattered.</h2>
     <ul>
       <li><strong>One attempt per day.</strong> Enforced via local persistence with a calendar-day reset. Scarcity is the whole point — without it, players burn out in ten minutes.</li>
       <li><strong>Streaks.</strong> Consecutive-day participation, broken if you skip. Standard daily-puzzle mechanic, and it works.</li>
-      <li><strong>History.</strong> Players can see all their past attempts and scores, so the daily session has weight.</li>
-      <li><strong>Achievements.</strong> Hitting 100, hitting streak milestones — the small carrots that keep people opening the app.</li>
+      <li><strong>History.</strong> A stats sheet with best score, average, games played and the last ten attempts, so the daily session has weight.</li>
+      <li><strong>Achievements.</strong> First circle, 90+, 95+ — the small carrots that keep people opening the app.</li>
     </ul>
 
     <h2>What I'd do differently.</h2>
     <ul>
       <li><strong>Add a global leaderboard.</strong> The single most-requested feature, and the one I cut to keep the scope small. Adding it would have meant a backend, accounts, and moderation — all reasonable, none small.</li>
-      <li><strong>Better scoring transparency.</strong> Players sometimes don't understand why a circle that "looks fine" scored low. A small post-attempt breakdown showing the actual centroid and radius variance would help.</li>
+      <li><strong>Better scoring transparency.</strong> Players sometimes don't understand why a circle that "looks fine" scored low. A small post-attempt breakdown showing the actual centroid and radius deviation would help.</li>
       <li><strong>Use it as a CI/CD playground.</strong> This was a perfect candidate for setting up Fastlane and proper App Store automation. Instead, I shipped manually each release. Lesson learnt for the next iOS project.</li>
     </ul>
 

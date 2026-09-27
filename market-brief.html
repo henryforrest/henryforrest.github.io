@@ -52,33 +52,33 @@
       <li><strong>Sharpe ratio</strong> — risk-adjusted return, calculated against the risk-free rate</li>
       <li><strong>Maximum drawdown</strong> — the worst peak-to-trough fall over the lookback window</li>
       <li><strong>Volatility measures</strong> — annualised standard deviation of returns</li>
-      <li><strong>Percentage moves</strong> across multiple horizons</li>
+      <li><strong>Annualised return</strong> — compound growth over the lookback window, so tickers are comparable</li>
     </ul>
     <p>Everything renders in a layout designed to be readable on a phone, not a Bloomberg terminal.</p>
 
     <h2>How it's built.</h2>
     <h3>iOS client (Swift)</h3>
-    <p>The mobile app is built natively in Swift. It handles the UI, request orchestration, and a local cache to keep things responsive when the user re-queries the same ticker within a session. Native rather than cross-platform was a deliberate choice — financial UIs benefit from feeling fast and tight, and Swift gives me direct control over animations, scroll behaviour, and gesture handling.</p>
+    <p>The mobile app is built natively in Swift. It handles the UI, request orchestration, input validation and connectivity checks, plus a client-side rate limiter so a fast tapper can't hammer the backend. Native rather than cross-platform was a deliberate choice — financial UIs benefit from feeling fast and tight, and Swift gives me direct control over animations, scroll behaviour, and gesture handling.</p>
 
     <h3>Backend (FastAPI on Fly.io)</h3>
-    <p>The backend is a FastAPI service in Python, deployed on Fly.io. When the iOS client requests a ticker, the backend pulls the underlying data from <code>yfinance</code>, computes the derived metrics server-side, and returns a single structured response. Doing the maths on the backend means the iOS app stays simple — it renders, it doesn't compute.</p>
+    <p>The backend is a FastAPI service in Python, shipped as a Docker image to Fly.io and redeployed by GitHub Actions on every push to main. When the iOS client requests a ticker, the backend pulls the underlying data from <code>yfinance</code>, computes the derived metrics server-side, and returns a single structured response. Doing the maths on the backend means the iOS app stays simple — it renders, it doesn't compute.</p>
 
-    <h3>Caching</h3>
-    <p>Live market data calls are not free, and Yahoo's endpoint is flaky under load. I added a backend caching layer with sensible TTLs so that:</p>
+    <h3>Handling failure</h3>
+    <p>Live market data calls are not free, and Yahoo's endpoint is flaky under load. Rather than pretend otherwise, the app treats failure as a first-class state:</p>
     <ul>
-      <li>Repeated queries for the same ticker within a short window don't hammer the upstream API</li>
-      <li>Latency on cache hits drops to near-zero</li>
-      <li>The app degrades gracefully when Yahoo rate-limits</li>
+      <li>Every failure maps to a typed error with a plain-English message — invalid ticker, offline, unknown symbol, rate limited, server error, or a response that wouldn't decode</li>
+      <li>A sliding-window rate limiter on the client (ten requests a minute) stops repeated taps from hammering the backend</li>
+      <li>Connectivity is monitored, so the request button disables offline and comes back when the connection does</li>
     </ul>
 
-    <p class="pullquote">"The interesting work wasn't writing Swift. It was deciding what computation belonged on the client, what belonged on the server, and what could be cached."</p>
+    <p class="pullquote">"The interesting work wasn't writing Swift. It was deciding what computation belonged on the client, what belonged on the server, and how the app should behave when the data source lets it down."</p>
 
     <h2>What I'd do differently.</h2>
     <p>If I were starting over today, three things would change:</p>
     <ul>
       <li><strong>Move off <code>yfinance</code></strong>. It's free and easy but rate-limited and unofficial. A proper paid data source (IEX Cloud, Polygon) would be more reliable and let me offer intraday granularity.</li>
       <li><strong>Add a proper test suite</strong>. The metric calculations are pure functions — they're crying out to be tested with property-based tests. I'd reach for <code>pytest</code> + <code>hypothesis</code> next time.</li>
-      <li><strong>Containerise it</strong>. Right now the backend deploys directly via Fly's buildpacks. A proper Docker image with a CI pipeline would make the deployment story cleaner and the project more portable.</li>
+      <li><strong>Add a caching layer</strong>. Every request goes straight to Yahoo. A short-TTL cache in front of it would cut latency on repeat queries and take the pressure off an upstream that rate-limits under load.</li>
     </ul>
 
     <h2>What it taught me.</h2>
