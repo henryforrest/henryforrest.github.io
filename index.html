@@ -229,6 +229,52 @@
       .work-year { padding-top: 0; }
     }
 
+    /* ===== ALSO (smaller work, no case study) ===== */
+    .also { margin-top: 3.5rem; }
+    .also-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--ink-muted);
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--rule);
+    }
+    .also-item {
+      display: grid;
+      grid-template-columns: 80px 1fr auto;
+      gap: 2rem;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid var(--rule);
+      align-items: start;
+      color: inherit;
+      transition: padding 0.3s ease;
+    }
+    .also-item:hover { padding-left: 0.75rem; }
+    .also-item:hover .also-link { color: var(--accent); }
+    .also-body { max-width: 640px; }
+    .also-title {
+      font-family: 'Fraunces', serif;
+      font-size: 1.2rem;
+      font-weight: 400;
+      line-height: 1.3;
+      margin-bottom: 0.35rem;
+    }
+    .also-desc { color: var(--ink-soft); font-size: 0.95rem; }
+    .also-link {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      letter-spacing: 0.05em;
+      color: var(--ink-muted);
+      padding-top: 0.4rem;
+      white-space: nowrap;
+      transition: color 0.3s ease;
+    }
+    @media (max-width: 720px) {
+      .also-item { grid-template-columns: 1fr; gap: 0.5rem; }
+      .also-link { padding-top: 0; }
+    }
+
     /* ===== ABOUT ===== */
     .about {
       background: var(--bg-alt);
@@ -490,6 +536,42 @@
         </article>
       </a>
 
+      <a href="zero-to-hero.html" class="work-item-link">
+        <article class="work-item">
+          <div class="work-year">2024</div>
+          <div class="work-body">
+            <h3 class="work-title">0 to Hero</h3>
+            <p class="work-desc">A university group project. A Django web app that gives students one sustainability challenge a day, scores them for doing it, and lets them spend the points on a virtual village. Five of us, two sprints, deployed for the demo. I built sign-up and login, the challenge-submission flow, the map and the profiles.</p>
+            <div class="work-tags">
+              <span>Python / Django</span>
+              <span>Team of five</span>
+              <span>Agile</span>
+            </div>
+          </div>
+          <div class="work-arrow">→</div>
+        </article>
+      </a>
+
+    </div>
+
+    <div class="also">
+      <div class="also-label">Also</div>
+      <a href="https://github.com/henryforrest/ant_colony_optimisation" class="also-item" target="_blank" rel="noopener">
+        <div class="work-year">2024</div>
+        <div class="also-body">
+          <h3 class="also-title">Ant colony optimisation for bin packing</h3>
+          <p class="also-desc">Two variants of an NP-hard packing problem, 500 items into 10 bins and into 50, solved with a pheromone-based ant colony algorithm, plus a parameter sweep over colony size and evaporation rate. Coursework, plain Python.</p>
+        </div>
+        <div class="also-link">GitHub ↗</div>
+      </a>
+      <a href="https://github.com/henryforrest/credit_card_default" class="also-item" target="_blank" rel="noopener">
+        <div class="work-year">2024</div>
+        <div class="also-body">
+          <h3 class="also-title">Credit card default prediction</h3>
+          <p class="also-desc">My first supervised-learning model. A two-layer neural network in TensorFlow with dropout and early stopping, predicting whether a cardholder defaults next month, at 82% accuracy on held-out data. Coursework, with the write-up in the repo.</p>
+        </div>
+        <div class="also-link">GitHub ↗</div>
+      </a>
     </div>
   </section>
 

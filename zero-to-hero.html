@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>0 to Hero — Case Study · Henry Forrest</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="case.css" />
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-name">Henry Forrest</a>
+      <a href="index.html#work" class="nav-back">← All Work</a>
+    </div>
+  </nav>
+
+  <article>
+    <div class="case-eyebrow">Group Project · 2024</div>
+    <h1>0 to Hero — a campus sustainability game built by <em>five people</em> in six weeks.</h1>
+    <p class="case-lede">A second-year university group project. A Django web app that gives students one sustainability challenge a day, scores them for doing it, and lets them spend the points on a virtual village. Two sprints, a shared repo, and a live deployment for the demo.</p>
+
+    <div class="case-meta">
+      <div>
+        <div class="case-meta-label">Team</div>
+        <div class="case-meta-value">Five, University of Exeter</div>
+      </div>
+      <div>
+        <div class="case-meta-label">Stack</div>
+        <div class="case-meta-value">Python, Django, SQLite</div>
+      </div>
+      <div>
+        <div class="case-meta-label">My part</div>
+        <div class="case-meta-value">Auth, posting, profiles, map page</div>
+      </div>
+      <div>
+        <div class="case-meta-label">Link</div>
+        <div class="case-meta-value"><a href="https://github.com/Robert-Lucas7/ECM2434_Group_Software_Project" target="_blank" rel="noopener">GitHub →</a></div>
+      </div>
+    </div>
+
+    <h2>The brief.</h2>
+    <p>Build a web app that gets students to act more sustainably on campus. Run it as a real software project: a team of five, sprints with a kanban board and meeting minutes, a shared codebase, and a demo at the end. The app needed a "gamekeeper" role so that staff could run the game after we'd handed it over, plus the privacy policy and terms that come with holding student data.</p>
+    <p>We called ours <strong>0 to Hero</strong>. Six weeks from first commit to final submission, with over two hundred commits from five people.</p>
+
+    <h2>What we built.</h2>
+    <ul>
+      <li><strong>One challenge a day.</strong> A scheduled job picks a new sustainability challenge each morning from the pool, skipping anything used in the last week. Challenges can carry a campus location, which shows up on the map.</li>
+      <li><strong>Post to complete it.</strong> Students write a short response to the day's challenge. Submissions earn a base score, a bonus for answering early, and a bonus for keeping a streak going. Miss a day and the streak resets.</li>
+      <li><strong>Spend it on a village.</strong> Points are coins. Coins buy items in the village shop, which get placed in your own village. You can visit other people's villages, which is most of the reason to keep going.</li>
+      <li><strong>Leaderboards</strong> by streak and score, and a profile page with a picture, current streak and best streak.</li>
+      <li><strong>Gamekeeper tools.</strong> Staff accounts can add, edit and delete challenges, set their locations, and moderate student posts.</li>
+      <li><strong>Exeter accounts only.</strong> Registration requires a university email address and consent to the privacy policy.</li>
+    </ul>
+
+    <h2>My part.</h2>
+    <p>We split the app by page rather than by layer, so each of us owned a slice from template to view to form. Mine were:</p>
+    <ul>
+      <li><strong>Registration and login</strong>, including the university-email validation and the privacy-policy consent step.</li>
+      <li><strong>The challenge submission page</strong>, which is the core loop: show today's challenge, take the response, record it against the user, and hand back to the home page.</li>
+      <li><strong>The map page's front end</strong>, and the wiring in the submission flow that records where the student was.</li>
+      <li><strong>Profiles</strong>: profile pictures, viewing other people's profiles and villages, and making sure you can only edit your own.</li>
+      <li><strong>The navigation bar</strong> that changes depending on whether you're signed in, the seed set of challenges, and the tests for the flows I owned.</li>
+    </ul>
+
+    <h2>Working in a team.</h2>
+    <p>This was the first time I'd written code that depended on someone else's code while they were still writing it. The data model was one person's job; everything I built sat on top of it, and when a field changed, my pages broke. We ran a Trello board with snapshots taken each sprint, kept minutes for every meeting, and got very familiar with merge conflicts, because five people were committing straight to <code>main</code>.</p>
+    <p>The thing that actually worked was the page-ownership split. Nobody was blocked waiting for someone else's layer, and the seams between pages were simple enough that integrating was mostly a matter of agreeing on URL names and template blocks.</p>
+
+    <p class="pullquote">"Owning a page end-to-end taught me more about Django than any tutorial. Owning it next to four other people taught me more about software."</p>
+
+    <h2>What I'd do differently.</h2>
+    <ul>
+      <li><strong>Branches and pull requests.</strong> Everyone on <code>main</code> worked at five people for six weeks, barely. A branch per feature and a quick review before merging would have caught half the last-day fixes earlier.</li>
+      <li><strong>Test from the start.</strong> The test suite landed in the final days, which meant it confirmed things worked rather than catching things that didn't. Writing the login and posting tests first would have made every later change safer.</li>
+      <li><strong>Check the location.</strong> Challenges have coordinates and submissions record where the student was, but nothing compares the two. It runs on the honour system. A simple distance check would have made location challenges mean something.</li>
+      <li><strong>Pin the environment.</strong> No requirements file meant "it works on my machine" was a recurring conversation. Ten minutes on a lockfile at the start would have saved hours.</li>
+    </ul>
+
+    <h2>What it taught me.</h2>
+    <p>Everything else on this site I built alone. This is the one that looks like a job: other people's code, a deadline that didn't move, a client-style brief, and a demo to a room. The habits I have now around small commits, clear ownership and talking before touching shared code started here, mostly by learning what happens without them.</p>
+  </article>
+
+  <div class="case-footer">
+    <a href="perfect-circle.html" class="case-footer-link">
+      <span class="mono">Previous</span>
+      ← Perfect Circle
+    </a>
+    <a href="index.html#work" class="case-footer-link">
+      <span class="mono">Index</span>
+      All work →
+    </a>
+  </div>
+
+  <footer>© 2026 · HENRY FORREST</footer>
+
+</body>
+</html>
